@@ -267,6 +267,10 @@ $route['getPickupTime_r']               = 'AppController/getPickupTime_ctrl';
 $route['updateCartIcoos_r']             = 'AppController/updateCartIcoos_ctrl';
 $route['gcDeliveryFee_r']               = 'AppController/gcDeliveryFee_ctrl';
 $route['placeOrderGoodsDelivery']       = 'GoodsController/placeOrderGoodsDelivery';
+
+
+//decryptpass
+$route['decryptPass']                   = 'TestController/decryptPass';
 	
 
 
