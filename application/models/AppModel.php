@@ -54,7 +54,7 @@ class AppModel extends CI_Model
 
 		$cust_num = array(
 			'customer_id' => $insert_id,
-			'mobile_number' => '+63'.$contactNumber,
+			'mobile_number' => '+63' . $contactNumber,
 			'in_use' => '1',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
@@ -70,7 +70,7 @@ class AppModel extends CI_Model
 			'password' => $this->hash_password($password),
 			'password2' => md5($password),
 			'user_from' => '2',
-			'mobile_number' => '0'.$contactNumber,
+			'mobile_number' => '0' . $contactNumber,
 			'status' => '1',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
@@ -99,10 +99,10 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res3 = $query->row_array();
 
-		
+
 		if (empty($res1['username'])) {
 			echo "wrongusername";
-		}else if ($res1['status'] == '0'){
+		} else if ($res1['status'] == '0') {
 			echo "accountblocked";
 		} else if (empty($res2['password2'])) {
 			echo "wrongpass";
@@ -113,11 +113,11 @@ class AppModel extends CI_Model
 			// echo "wrongusername";
 		} else  if (!empty($res3)) {
 			echo $res3['customer_id'];
-		} 
-		
+		}
+
 		// { if ($res1['status'] == '0') 
 		// 	echo "wrongusername";
-			
+
 		// 	//  
 		// 	// if (empty($res1['username'])) {
 		// 	// 	echo "wrongpass";
@@ -194,7 +194,7 @@ class AppModel extends CI_Model
 
 	public function getPlaceOrderDataMod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 		$this->db->from('customer_addresses as cust_add');
 		$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
@@ -210,7 +210,7 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result_array();
 		if (count($res) == 0) {
-			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 			$this->db->select('*,twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 			$this->db->from('customer_addresses as cust_add');
 			$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
@@ -558,7 +558,7 @@ class AppModel extends CI_Model
 
 	public function getBuGroupID_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,fdprod.tenant_id as t_id');
 		$this->db->from('app_customer_temp_orders as appCart');
 		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
@@ -635,7 +635,7 @@ class AppModel extends CI_Model
 
 	public function getBu_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,fdprod.tenant_id as t_id');
 		$this->db->from('app_customer_temp_orders as appCart');
 		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
@@ -661,7 +661,7 @@ class AppModel extends CI_Model
 
 	public function getBu_mod1($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(total_price) as sumpertenants, fdprod.tenant_id as t_id');
 		$this->db->from('app_customer_temp_orders as appCart');
 		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
@@ -670,7 +670,7 @@ class AppModel extends CI_Model
 		$this->db->where('appCart.customerId', $cusId);
 		$this->db->group_by('fdprod.tenant_id');
 		$this->db->order_by('appCart .id', 'desc');
-		
+
 		$query = $this->db->get();
 		$res = $query->result_array();
 		$post_data = array();
@@ -696,10 +696,10 @@ class AppModel extends CI_Model
 		$replacewith1 = array("", "");
 
 		$productID 		  	= str_replace($search1, $replacewith1, $productID);
-		
+
 		$productId  	= explode(',', $productID);
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,fdprod.tenant_id as t_id');
 		$this->db->from('app_customer_temp_orders as appCart');
 		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
@@ -730,7 +730,7 @@ class AppModel extends CI_Model
 	{
 
 		// $productID = ['495','201','192'];
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(total_price) as sumpertenants, count(*) as num');
 		$this->db->from('app_customer_temp_orders as appCart');
 		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
@@ -740,7 +740,7 @@ class AppModel extends CI_Model
 		// $this->db->where_in('appCart.product_id', $productID);
 		$this->db->order_by('appCart.id', 'desc');
 		$this->db->group_by('fdprod.tenant_id');
-	
+
 		$query = $this->db->get();
 		$res = $query->result_array();
 		$post_data = array();
@@ -766,7 +766,7 @@ class AppModel extends CI_Model
 		$replacewith1 = array("", "");
 
 		$productID 		  	= str_replace($search1, $replacewith1, $productID);
-		
+
 		$productId  	= explode(',', $productID);
 		// $productId = ['495','191','201','192'];
 
@@ -774,39 +774,39 @@ class AppModel extends CI_Model
 
 		// 	$prod_id = $productID_array[$x];
 
-			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
-			$this->db->select('*,sum(total_price) as sumpertenants, count(*) as num, fdprod.product_id as prodID');
-			$this->db->from('app_customer_temp_orders as appCart');
-			$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
-			$this->db->join('locate_tenants as locTenant', 'locTenant.tenant_id = 	fdprod.tenant_id', 'inner');
-			$this->db->join('locate_business_units as locBu', 'locBu.bunit_code = locTenant.bunit_code', 'left');
-			$this->db->join('pick_up_schedules as pick_sched', 'pick_sched.tenant_id = locTenant.tenant_id');
-			$this->db->where('pick_sched.status', '1');
-			$this->db->where('appCart.customerId', $cusId);
-			$this->db->where_in('appCart.id', $productId);
-			$this->db->order_by('appCart.id', 'desc');
-			$this->db->group_by('fdprod.tenant_id');
-		
-			$query = $this->db->get();
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+		$this->db->select('*,sum(total_price) as sumpertenants, count(*) as num, fdprod.product_id as prodID');
+		$this->db->from('app_customer_temp_orders as appCart');
+		$this->db->join('fd_products as fdprod', 'fdprod.product_id = appCart.product_id', 'inner');
+		$this->db->join('locate_tenants as locTenant', 'locTenant.tenant_id = 	fdprod.tenant_id', 'inner');
+		$this->db->join('locate_business_units as locBu', 'locBu.bunit_code = locTenant.bunit_code', 'left');
+		$this->db->join('pick_up_schedules as pick_sched', 'pick_sched.tenant_id = locTenant.tenant_id');
+		$this->db->where('pick_sched.status', '1');
+		$this->db->where('appCart.customerId', $cusId);
+		$this->db->where_in('appCart.id', $productId);
+		$this->db->order_by('appCart.id', 'desc');
+		$this->db->group_by('fdprod.tenant_id');
 
-				$res = $query->result_array();
-				$post_data = array();
-				foreach ($res as $value) {
-					$post_data[] = array(
-						'count' => $value['num'],
-						'bu_id' => $value['bunit_code'],
-						'bu_name' => $value['business_unit'],
-						'tenant_id' => $value['tenant_id'],
-						'tenant_name' => $value['tenant'],
-						'acroname' => $value['acroname'],
-						'productID' => $value['product_id'],
-						'total' => number_format($value['sumpertenants'], 2),
-						'time_start'	=> $value['time_start'],
-						'time_end'		=> $value['time_end']
-					);
-				}
-				$item = array('user_details' => $post_data);
-				echo json_encode($item);
+		$query = $this->db->get();
+
+		$res = $query->result_array();
+		$post_data = array();
+		foreach ($res as $value) {
+			$post_data[] = array(
+				'count' => $value['num'],
+				'bu_id' => $value['bunit_code'],
+				'bu_name' => $value['business_unit'],
+				'tenant_id' => $value['tenant_id'],
+				'tenant_name' => $value['tenant'],
+				'acroname' => $value['acroname'],
+				'productID' => $value['product_id'],
+				'total' => number_format($value['sumpertenants'], 2),
+				'time_start'	=> $value['time_start'],
+				'time_end'		=> $value['time_end']
+			);
+		}
+		$item = array('user_details' => $post_data);
+		echo json_encode($item);
 
 		// }
 	}
@@ -818,7 +818,7 @@ class AppModel extends CI_Model
 		// 								where id NOT IN (select ticket_id from toms_tag_riders)
 		// 								and customer_id = '$cusId' and cancel_status != '1'
 		// 								order by id desc");
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, tickets.mop as mop, tickets.id as id, tickets.created_at as date, SUM(IF(toms_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as tickets');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id');
@@ -852,7 +852,7 @@ class AppModel extends CI_Model
 		// 								where id NOT IN (select ticket_id from toms_tag_riders)
 		// 								and customer_id = '$cusId' and cancel_status != '1'
 		// 								order by id desc");
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, tickets.mop as mop, tickets.id as id, tickets.created_at as date, SUM(IF(gc_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as tickets');
 		$this->db->join('gc_final_order as gc_order', 'gc_order.ticket_id = tickets.id');
@@ -883,7 +883,7 @@ class AppModel extends CI_Model
 
 	public function getTicketNoFood_ontrans_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, toms_tickets.mop as mop');
 		$this->db->from('tickets as toms_tickets');
 		$this->db->join('toms_tag_riders as tag_riders', 'tag_riders.ticket_id = toms_tickets.id', 'left');
@@ -915,7 +915,7 @@ class AppModel extends CI_Model
 
 	public function getTicketNoFood_delivered_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('tickets as toms_tickets');
 		$this->db->join('toms_tag_riders as tag_riders', 'tag_riders.ticket_id = toms_tickets.id', 'left');
@@ -942,10 +942,10 @@ class AppModel extends CI_Model
 
 	public function getTicket_cancelled_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('tickets as toms_tickets');
-		$this->db->join('toms_customer_order as toms_order','toms_order.ticket_id = tickets.id');
+		$this->db->join('toms_customer_order as toms_order', 'toms_order.ticket_id = tickets.id');
 		$this->db->where('toms_tickets.cancel_status', '1');
 		$this->db->where('toms_tickets.customer_id', $cusId);
 		$this->db->order_by('toms_tickets.updated_at', 'desc');
@@ -998,7 +998,7 @@ class AppModel extends CI_Model
 		$res = $query->result_array();
 
 		$post_data = array();
-		foreach($res as $value) {
+		foreach ($res as $value) {
 			$post_data[] = array(
 				'version_code' 	=> $value['version_code'],
 				'changelog'		=> $value['changelog']
@@ -1013,7 +1013,7 @@ class AppModel extends CI_Model
 		$this->db->select('*,appsu.created_at');
 		$this->db->from('toms_customer_details as toms_det');
 		$this->db->join('app_users as appsu', 'appsu.customer_id = toms_det.id');
-		$this->db->where('toms_det.id', $cusId);          
+		$this->db->where('toms_det.id', $cusId);
 		$query = $this->db->get();
 		$res = $query->result_array();
 		$post_data = array();
@@ -1045,7 +1045,7 @@ class AppModel extends CI_Model
 		$post_data = array();
 
 
-		foreach($res as $value) {
+		foreach ($res as $value) {
 			$post_data[] = array(
 				'active' => $value['active'],
 			);
@@ -1066,7 +1066,7 @@ class AppModel extends CI_Model
 		$post_data = array();
 
 
-		foreach($res as $value) {
+		foreach ($res as $value) {
 			$post_data[] = array(
 				'bunit_code' => $value['bunit_code'],
 				'active' => $value['active'],
@@ -1098,12 +1098,12 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-			$post_data = array();
-			foreach ($res as $value) {
-				$post_data[] = array(
-					'container_type' => $value['container_type'],
-					'quantity'		 => $value['quantity'],
-				);
+		$post_data = array();
+		foreach ($res as $value) {
+			$post_data[] = array(
+				'container_type' => $value['container_type'],
+				'quantity'		 => $value['quantity'],
+			);
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
@@ -1126,42 +1126,42 @@ class AppModel extends CI_Model
 
 		if (count($res) == 0) {
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
-		$this->db->select('*,tickets.id as ticketId, tickets.cancel_status as canceL');
-		$this->db->from('tickets as tickets');
-		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
-		$this->db->join('fd_products as fdprod', 'fdprod.product_id = toms_order.product_id', 'inner');
-		$this->db->join('locate_tenants as locTenant', 'locTenant.tenant_id = 	fdprod.tenant_id', 'inner');
-		$this->db->where('tickets.ticket', $ticketNo);
-		$this->db->where('locTenant.tenant_id', $tenantId);
-		$this->db->group_by('fdprod.tenant_id');
-		$query = $this->db->get();
-		$res = $query->result_array();
-		$post_data = array();
-		foreach ($res as $value) {
-		
-			$post_data[] = array(
-				'pending_status'      => $value['pending_status'],
-				'ticketId' 			  => $value['ticketId'],
-				'submitted_at'		  => $value['submitted_at'],
-				'prepared_status'     => $value['prepared_status'],
-				'prepared_at' 	 	  => $value['prepared_at'],
-				'r_setup'			  => $value['r_setup_stat'],
-				'r_setup_at'		  => $value['r_setup_stat_at'],
-				'tag_status'		  => $value['tag_status'],
-				'tag_status_at'		  => $value['tag_status_at'],
-				'tenant'		  	  => $value['tenant'],	
-			);
-		}
-	
-		$item = array('user_details' => $post_data);
-		echo json_encode($item);
-		}else{
+			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+			$this->db->select('*,tickets.id as ticketId, tickets.cancel_status as canceL');
+			$this->db->from('tickets as tickets');
+			$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
+			$this->db->join('fd_products as fdprod', 'fdprod.product_id = toms_order.product_id', 'inner');
+			$this->db->join('locate_tenants as locTenant', 'locTenant.tenant_id = 	fdprod.tenant_id', 'inner');
+			$this->db->where('tickets.ticket', $ticketNo);
+			$this->db->where('locTenant.tenant_id', $tenantId);
+			$this->db->group_by('fdprod.tenant_id');
+			$query = $this->db->get();
+			$res = $query->result_array();
+			$post_data = array();
+			foreach ($res as $value) {
+
+				$post_data[] = array(
+					'pending_status'      => $value['pending_status'],
+					'ticketId' 			  => $value['ticketId'],
+					'submitted_at'		  => $value['submitted_at'],
+					'prepared_status'     => $value['prepared_status'],
+					'prepared_at' 	 	  => $value['prepared_at'],
+					'r_setup'			  => $value['r_setup_stat'],
+					'r_setup_at'		  => $value['r_setup_stat_at'],
+					'tag_status'		  => $value['tag_status'],
+					'tag_status_at'		  => $value['tag_status_at'],
+					'tenant'		  	  => $value['tenant'],
+				);
+			}
+
+			$item = array('user_details' => $post_data);
+			echo json_encode($item);
+		} else {
 
 
 			$post_data = array();
 			foreach ($res as $value) {
-			
+
 				$post_data[] = array(
 					'pending_status'      => $value['pending_status'],
 					'ticketId' 			  => $value['ticketId'],
@@ -1180,14 +1180,14 @@ class AppModel extends CI_Model
 					'completed_at'        => $value['completed_at'],
 					'cancelled_status'	  => $value['cancelled_status'],
 					'cancelled_at'		  => $value['cancelled_at'],
-					'tenant'		  	  => $value['tenant'],	
+					'tenant'		  	  => $value['tenant'],
 					'tenant_id' 		  => $value['tenant_id']
-			
+
 				);
-		}
-		
-		$item = array('user_details' => $post_data);
-		echo json_encode($item);
+			}
+
+			$item = array('user_details' => $post_data);
+			echo json_encode($item);
 		}
 	}
 
@@ -1205,17 +1205,17 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-			$post_data = array();
-			foreach ($res as $value) {
-			
-				$post_data[] = array(
-					'pending_status'      => $value['pending_status'],
-					'ticketId' 			  => $value['ticketId'],
-					'submitted_at'		  => $value['submitted_at'],
-					'prepared_at' 	 	  => $value['prepared_at'],
-					'tag_pickup_at'		  => $value['tag_pickup_at'],
-					'tenant'		  	  => $value['tenant'],	
-				);
+		$post_data = array();
+		foreach ($res as $value) {
+
+			$post_data[] = array(
+				'pending_status'      => $value['pending_status'],
+				'ticketId' 			  => $value['ticketId'],
+				'submitted_at'		  => $value['submitted_at'],
+				'prepared_at' 	 	  => $value['prepared_at'],
+				'tag_pickup_at'		  => $value['tag_pickup_at'],
+				'tenant'		  	  => $value['tenant'],
+			);
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
@@ -1233,23 +1233,23 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-			$post_data = array();
-			foreach ($res as $value) {
-			
-				$post_data[] = array(
+		$post_data = array();
+		foreach ($res as $value) {
 
-					'pending_status'      => $value['pending_status'],
-					'ticketId' 			  => $value['ticketId'],
-					'submitted_at'		  => $value['submitted_at'],
-					'prepared_at' 	 	  => $value['prepared_at'],
-					'ready_pickup_at'	  => $value['ready_for_pickup_at'],
-					'paid_at'			  => $value['paid_at'],
-					'cancel_status'		  => $value['cancel_status'],
-					'cancelled_status'	  => $value['cancelled_status'],
-					'released_status'	  => $value['released_status'],
-					'released_at'		  => $value['released_at']
-					
-				);
+			$post_data[] = array(
+
+				'pending_status'      => $value['pending_status'],
+				'ticketId' 			  => $value['ticketId'],
+				'submitted_at'		  => $value['submitted_at'],
+				'prepared_at' 	 	  => $value['prepared_at'],
+				'ready_pickup_at'	  => $value['ready_for_pickup_at'],
+				'paid_at'			  => $value['paid_at'],
+				'cancel_status'		  => $value['cancel_status'],
+				'cancelled_status'	  => $value['cancelled_status'],
+				'released_status'	  => $value['released_status'],
+				'released_at'		  => $value['released_at']
+
+			);
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
@@ -1265,9 +1265,9 @@ class AppModel extends CI_Model
 
 		$post_data = array();
 		foreach ($res as $value) {
-		
+
 			$post_data[] = array(
-				'cancel_status'       => $value['cancel_status'],			
+				'cancel_status'       => $value['cancel_status'],
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -1465,7 +1465,7 @@ class AppModel extends CI_Model
 
 	public function lookItems_segregate_mod($ticketNo)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, SUM(IF(toms_order.canceled_status = 0, total_price, 0)) sumpertenants,  
 		SUM(IF(toms_order.prepared_status = 1, prepared_status, 0)) sumprepared,
 		SUM(toms_order.icoos) as icoos,
@@ -1496,7 +1496,7 @@ class AppModel extends CI_Model
 				'bu_id'			  => $value['bunit_code'],
 				'total_price'     => $value['total_price'],
 				'cancel_status'   => $value['cancel_status'],
-				'sumpertenants'	  => number_format($value['sumpertenants'], 2),	
+				'sumpertenants'	  => number_format($value['sumpertenants'], 2),
 				'sumprepared'	  => $value['sumprepared'],
 			);
 		}
@@ -1506,7 +1506,7 @@ class AppModel extends CI_Model
 
 	public function lookItems_segregate2_mod($ticketNo)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, SUM(IF(gc_order.canceled_status = 0, total_price, 0)) sumperstore, tickets.id as ticket_id');
 		$this->db->from('tickets as tickets');
 		$this->db->join('gc_final_order as gc_order', 'gc_order.ticket_id = tickets.id', 'inner');
@@ -1533,8 +1533,8 @@ class AppModel extends CI_Model
 				'canceled_status'	=> $value['canceled_status'],
 				'cancelled_status'	=> $value['cancelled_status'],
 				'prepared_status'	=> $value['preparing_status']
-				
-				
+
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -1543,7 +1543,7 @@ class AppModel extends CI_Model
 
 	public function getTotalAmount_mod($ticketNo)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, SUM(IF(toms_order.canceled_status = 0, total_price, 0)) sumpertenants');
 		$this->db->from('tickets as tickets');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
@@ -1561,7 +1561,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 
 			$post_data[] = array(
-				'sumpertenants'	  => number_format($value['sumpertenants'], 2),	
+				'sumpertenants'	  => number_format($value['sumpertenants'], 2),
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -1570,7 +1570,7 @@ class AppModel extends CI_Model
 
 	public function getAmountPerTenantmod($ticketNo)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(total_price) as sumpertenants,
 		loc_bu.business_unit as loc_bu,
 		loc_tenants.tenant as tenant_name');
@@ -1600,7 +1600,7 @@ class AppModel extends CI_Model
 
 	public function lookitems_good_mod($ticketNo)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,gc_final.id as gc_final_id,gc_final.ticket_id as tik_id,
 		gc_final.ticket_id as ticket,gc_prod_items.product_name as prod_name,
 		gc_prod_items.image as prod_image,gc_final.quantity as quantity, gc_final.pending_status as pending_status');
@@ -1637,7 +1637,7 @@ class AppModel extends CI_Model
 				'prod_image' 	  	=> $this->gcproductImage . $value['prod_image'],
 				'ifexists' 	 	  	=> $val,
 				'pending_status'  	=> $value['pending_status'],
-				'for_pickup'	  	=> $value['ready_for_pickup_status'],	
+				'for_pickup'	  	=> $value['ready_for_pickup_status'],
 				'paid_status'		=> $value['paid_status'],
 				'released_status' 	=> $value['released_status'],
 				'cancelled_status'	=> $value['cancelled_status'],
@@ -1649,16 +1649,17 @@ class AppModel extends CI_Model
 		echo json_encode($item);
 	}
 
-	public function loadCartDataNew_mod($cusId) {
+	public function loadCartDataNew_mod($cusId)
+	{
 
 		$temp_orders = [];
-	
+
 		$this->db->select('*, fd_prod.product_id as product_id, temp_orders.id as temp_id');
 		$this->db->from('app_customer_temp_orders as temp_orders');
 		$this->db->join('fd_products as fd_prod', "fd_prod.product_id = temp_orders.product_id", 'inner');
 		$this->db->where('customerId', $cusId);
 		$this->db->order_by('temp_orders.id', 'desc');
-		
+
 		$temp_orders = $this->db->get()->result();
 		$main_items = [];
 
@@ -1682,21 +1683,22 @@ class AppModel extends CI_Model
 			$details['choices'] = $choices;
 			$details['suggestions'] = $suggestions;
 
-			
-			$details['main_item']->addon_length = count($addons) + count($choices) + count($suggestions);	
+
+			$details['main_item']->addon_length = count($addons) + count($choices) + count($suggestions);
 			$main_items[] = $details;
 		}
-		
+
 		echo json_encode(['user_details' => $main_items]);
 	}
 
-	public function loadCartDataNew2_mod($cusId, $productID) {
+	public function loadCartDataNew2_mod($cusId, $productID)
+	{
 
 		$search1 = array("[", "]");
 		$replacewith1 = array("", "");
 
 		$productID 	= str_replace($search1, $replacewith1, $productID);
-		
+
 		$productId  = explode(',', $productID);
 
 		$temp_orders = [];
@@ -1728,11 +1730,11 @@ class AppModel extends CI_Model
 			$details['addons'] = $addons;
 			$details['choices'] = $choices;
 			$details['suggestions'] = $suggestions;
-			
-			$details['main_item']->addon_length = count($addons) + count($choices) + count($suggestions);	
+
+			$details['main_item']->addon_length = count($addons) + count($choices) + count($suggestions);
 			$main_items[] = $details;
 		}
-		
+
 		echo json_encode(['user_details' => $main_items]);
 	}
 
@@ -1775,7 +1777,7 @@ class AppModel extends CI_Model
 		$this->db->where('addon_suggestion.product_id', $product_id);
 		return $this->db->get()->result();
 	}
- 
+
 	public function loadCartData_mod($cusId)
 	{
 		$total = array();
@@ -2381,7 +2383,7 @@ class AppModel extends CI_Model
 		// $this->db->where('fd_products.product_id', $prodId);
 		// $this->db->group_by('fd_products.product_id');
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('fd_product_prices as fd_prod_price');
 		$this->db->join('fd_products as fd_prod', 'fd_prod.product_id = fd_prod_price.product_id', 'left');
@@ -2422,18 +2424,18 @@ class AppModel extends CI_Model
 
 			$results = $this->db->get()->result();
 
-			
-				if (!empty($results)) :
-					foreach ($results as $result) {
-						$addon_sides['addon_sides_data'][] = array(
-							'sub_productid'   => $result->product_id,
-							'sub_productname' => $result->product_name,
-							'unit'            => $result->unit_measure,
-							'uom_id'		  => $result->uom_id,
-							'addon_price'     => $result->addon_price,
-							'addon_sides'     => $result->addon_sides,
-						);
-					}
+
+			if (!empty($results)) :
+				foreach ($results as $result) {
+					$addon_sides['addon_sides_data'][] = array(
+						'sub_productid'   => $result->product_id,
+						'sub_productname' => $result->product_name,
+						'unit'            => $result->unit_measure,
+						'uom_id'		  => $result->uom_id,
+						'addon_price'     => $result->addon_price,
+						'addon_sides'     => $result->addon_sides,
+					);
+				}
 			else :
 				$addon_sides['addon_sides_data'][] = array();
 			endif;
@@ -2451,18 +2453,18 @@ class AppModel extends CI_Model
 
 			$result1s = $this->db->get()->result();
 
-			
-				if (!empty($result1s)) :
-					foreach ($result1s as $result) {
-						$addon_dessert['addon_dessert_data'][] = array(
-							'sub_productid'   => $result->product_id,
-							'sub_productname' => $result->product_name,
-							'unit'            => $result->unit_measure,
-							'uom_id'		  => $result->uom_id,
-							'addon_price'     => $result->addon_price,
-							'addon_dessert'     => $result->addon_dessert,
-						);
-					}
+
+			if (!empty($result1s)) :
+				foreach ($result1s as $result) {
+					$addon_dessert['addon_dessert_data'][] = array(
+						'sub_productid'   => $result->product_id,
+						'sub_productname' => $result->product_name,
+						'unit'            => $result->unit_measure,
+						'uom_id'		  => $result->uom_id,
+						'addon_price'     => $result->addon_price,
+						'addon_dessert'     => $result->addon_dessert,
+					);
+				}
 			else :
 				$addon_dessert['addon_dessert_data'][] = array();
 			endif;
@@ -2480,18 +2482,18 @@ class AppModel extends CI_Model
 
 			$result2s = $this->db->get()->result();
 
-			
-				if (!empty($result2s)) :
-					foreach ($result2s as $result) {
-						$addon_drinks['addon_drinks_data'][] = array(
-							'sub_productid'   => $result->product_id,
-							'sub_productname' => $result->product_name,
-							'unit'            => $result->unit_measure,
-							'uom_id'		  => $result->uom_id,
-							'addon_price'     => $result->addon_price,
-							'addon_drinks'     => $result->addon_drinks,
-						);
-					}
+
+			if (!empty($result2s)) :
+				foreach ($result2s as $result) {
+					$addon_drinks['addon_drinks_data'][] = array(
+						'sub_productid'   => $result->product_id,
+						'sub_productname' => $result->product_name,
+						'unit'            => $result->unit_measure,
+						'uom_id'		  => $result->uom_id,
+						'addon_price'     => $result->addon_price,
+						'addon_drinks'     => $result->addon_drinks,
+					);
+				}
 			else :
 				$addon_drinks['addon_drinks_data'][] = array();
 			endif;
@@ -2506,7 +2508,7 @@ class AppModel extends CI_Model
 			$this->db->where('fd_product_choices.product_id', $prodId);
 			$this->db->where('fd_product_choices.choice_drinks', '1');
 			$this->db->order_by('fd_product_choices.addon_price');
-			
+
 
 			$result3s = $this->db->get()->result();
 
@@ -2535,7 +2537,7 @@ class AppModel extends CI_Model
 			$this->db->where('fd_product_choices.product_id', $prodId);
 			$this->db->where('fd_product_choices.choice_fries', '1');
 			$this->db->order_by('fd_product_choices.addon_price');
-			
+
 
 			$result4s = $this->db->get()->result();
 
@@ -2564,7 +2566,7 @@ class AppModel extends CI_Model
 			$this->db->where('fd_product_choices.product_id', $prodId);
 			$this->db->where('fd_product_choices.choice_sides', '1');
 			$this->db->order_by('fd_product_choices.addon_price');
-			
+
 
 			$result5s = $this->db->get()->result();
 
@@ -2640,7 +2642,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2650,13 +2652,13 @@ class AppModel extends CI_Model
 
 			$results8 = $this->db->get()->result();
 
-			if (!empty($results8)) : 
+			if (!empty($results8)) :
 				foreach ($results8 as $result) {
 					$suggestion_flavor_data['suggestion_flavor_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2670,7 +2672,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2680,13 +2682,13 @@ class AppModel extends CI_Model
 
 			$results9 = $this->db->get()->result();
 
-			if (!empty($results9)) : 
+			if (!empty($results9)) :
 				foreach ($results9 as $result) {
 					$suggestion_woc_data['suggestion_woc_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2700,7 +2702,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2710,13 +2712,13 @@ class AppModel extends CI_Model
 
 			$results10 = $this->db->get()->result();
 
-			if (!empty($results10)) : 
+			if (!empty($results10)) :
 				foreach ($results10 as $result) {
 					$suggestion_tos_data['suggestion_tos_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2730,7 +2732,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2740,13 +2742,13 @@ class AppModel extends CI_Model
 
 			$results11 = $this->db->get()->result();
 
-			if (!empty($results11)) : 
+			if (!empty($results11)) :
 				foreach ($results11 as $result) {
 					$suggestion_ton_data['suggestion_ton_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2760,7 +2762,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2769,13 +2771,13 @@ class AppModel extends CI_Model
 
 			$results12 = $this->db->get()->result();
 
-			if (!empty($results12)) : 
+			if (!empty($results12)) :
 				foreach ($results12 as $result) {
 					$suggestion_tops_data['suggestion_tops_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2789,7 +2791,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2799,13 +2801,13 @@ class AppModel extends CI_Model
 
 			$results13 = $this->db->get()->result();
 
-			if (!empty($results13)) : 
+			if (!empty($results13)) :
 				foreach ($results13 as $result) {
 					$suggestion_coi_data['suggestion_coi_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2819,7 +2821,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2829,13 +2831,13 @@ class AppModel extends CI_Model
 
 			$results14 = $this->db->get()->result();
 
-			if (!empty($results14)) : 
+			if (!empty($results14)) :
 				foreach ($results14 as $result) {
 					$suggestion_coslfm_data['suggestion_coslfm_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2849,7 +2851,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2859,13 +2861,13 @@ class AppModel extends CI_Model
 
 			$results15 = $this->db->get()->result();
 
-			if (!empty($results15)) : 
+			if (!empty($results15)) :
 				foreach ($results15 as $result) {
 					$suggestion_sink_data['suggestion_sink_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2879,7 +2881,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2889,13 +2891,13 @@ class AppModel extends CI_Model
 
 			$results16 = $this->db->get()->result();
 
-			if (!empty($results16)) : 
+			if (!empty($results16)) :
 				foreach ($results16 as $result) {
 					$suggestion_bcf_data['suggestion_bcf_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2909,7 +2911,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2919,13 +2921,13 @@ class AppModel extends CI_Model
 
 			$results17 = $this->db->get()->result();
 
-			if (!empty($results17)) : 
+			if (!empty($results17)) :
 				foreach ($results17 as $result) {
 					$suggestion_cc_data['suggestion_cc_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2939,7 +2941,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2949,13 +2951,13 @@ class AppModel extends CI_Model
 
 			$results18 = $this->db->get()->result();
 
-			if (!empty($results18)) : 
+			if (!empty($results18)) :
 				foreach ($results18 as $result) {
 					$suggestion_com_data['suggestion_com_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2969,7 +2971,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -2979,13 +2981,13 @@ class AppModel extends CI_Model
 
 			$results19 = $this->db->get()->result();
 
-			if (!empty($results19)) : 
+			if (!empty($results19)) :
 				foreach ($results19 as $result) {
 					$suggestion_coft_data['suggestion_coft_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -2999,7 +3001,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3009,13 +3011,13 @@ class AppModel extends CI_Model
 
 			$results20 = $this->db->get()->result();
 
-			if (!empty($results20)) : 
+			if (!empty($results20)) :
 				foreach ($results20 as $result) {
 					$suggestion_cymf_data['suggestion_cymf_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3029,7 +3031,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3039,13 +3041,13 @@ class AppModel extends CI_Model
 
 			$results21 = $this->db->get()->result();
 
-			if (!empty($results21)) : 
+			if (!empty($results21)) :
 				foreach ($results21 as $result) {
 					$suggestion_tomb_data['suggestion_tomb_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3059,7 +3061,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3069,13 +3071,13 @@ class AppModel extends CI_Model
 
 			$results22 = $this->db->get()->result();
 
-			if (!empty($results22)) : 
+			if (!empty($results22)) :
 				foreach ($results22 as $result) {
 					$suggestion_cosv_data['suggestion_cosv_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3089,7 +3091,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3099,13 +3101,13 @@ class AppModel extends CI_Model
 
 			$results23 = $this->db->get()->result();
 
-			if (!empty($results23)) : 
+			if (!empty($results23)) :
 				foreach ($results23 as $result) {
 					$suggestion_top_data['suggestion_top_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3119,7 +3121,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3129,13 +3131,13 @@ class AppModel extends CI_Model
 
 			$results24 = $this->db->get()->result();
 
-			if (!empty($results24)) : 
+			if (!empty($results24)) :
 				foreach ($results24 as $result) {
 					$suggestion_tocw_data['suggestion_tocw_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3149,7 +3151,7 @@ class AppModel extends CI_Model
 		foreach ($res as $value) {
 			$this->db->select('*');
 			$this->db->from('fd_addon_suggestions as addon_suggestions');
-			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id','inner');
+			$this->db->join('fd_product_suggestions as prod_suggestions', 'prod_suggestions.id = addon_suggestions.product_suggestion_id', 'inner');
 			$this->db->join('fd_suggestions', 'fd_suggestions.id = prod_suggestions.suggestion_id', 'inner');
 			$this->db->join('fd_product_prices as prod_prices', 'prod_prices.product_id = addon_suggestions.product_id');
 			$this->db->where('addon_suggestions.product_id', $prodId);
@@ -3159,13 +3161,13 @@ class AppModel extends CI_Model
 
 			$results25 = $this->db->get()->result();
 
-			if (!empty($results25)) : 
+			if (!empty($results25)) :
 				foreach ($results25 as $result) {
 					$suggestion_nameless_data['suggestion_nameless_data'][] = array(
 						'price_productid'   => $result->product_id,
 						'suggestion_name'   => $result->description,
 						'unit'              => $result->uom_id,
-						'prod_suggestion_id'=> $result->product_suggestion_id,
+						'prod_suggestion_id' => $result->product_suggestion_id,
 						'price'				=> $result->addon_price,
 						'default'			=> $result->default_choice,
 						'suggestion_id'		=> $result->suggestion_id
@@ -3203,7 +3205,7 @@ class AppModel extends CI_Model
 		$post_data[] = $suggestion_top_data;
 		$post_data[] = $suggestion_tocw_data;
 		$post_data[] = $suggestion_nameless_data;
-	
+
 		// $post_data[] = $suggestions_data;
 
 		$item = array('user_details' => $post_data);
@@ -3233,29 +3235,29 @@ class AppModel extends CI_Model
 	}
 
 	public function addToCartNew_mod(
-	
-		$userID, 
-		$prodId, 
-		$uomId, 
-		$_counter, 
-		$uomPrice, 
+
+		$userID,
+		$prodId,
+		$uomId,
+		$_counter,
+		$uomPrice,
 		$measurement,
 
 		$choiceUomIdDrinks,
-		$choiceIdDrinks, 
-		$choicePriceDrinks, 
+		$choiceIdDrinks,
+		$choicePriceDrinks,
 
 		$choiceUomIdFries,
-		$choiceIdFries, 
+		$choiceIdFries,
 		$choicePriceFries,
 
 		$choiceUomIdSides,
-		$choiceIdSides, 
+		$choiceIdSides,
 		$choicePriceSides,
 
 		$suggestionIdFlavor,
-      	$productSuggestionIdFlavor,
-      	$suggestionPriceFlavor,
+		$productSuggestionIdFlavor,
+		$suggestionPriceFlavor,
 
 		$suggestionIdWoc,
 		$productSuggestionIdWoc,
@@ -3304,7 +3306,7 @@ class AppModel extends CI_Model
 		$suggestionIdCymf,
 		$productSuggestionIdCymf,
 		$suggestionPriceCymf,
-	
+
 		$suggestionIdTomb,
 		$productSuggestionIdTomb,
 		$suggestionPriceTomb,
@@ -3325,26 +3327,26 @@ class AppModel extends CI_Model
 		$productSuggestionIdNameless,
 		$suggestionPriceNameless,
 
-		$selectedSideOnPrice, 
-		$selectedSideItems, 
+		$selectedSideOnPrice,
+		$selectedSideItems,
 		$selectedSideItemsUom,
 
 		$selectedSideSides,
 		$selectedSideDessert,
-		$selectedSideDrinks)
-	{
+		$selectedSideDrinks
+	) {
 		try {
 			$this->db->trans_start();
 
 			$temp_addon_id = "";
 			$temp_addon_idd = "";
 			$temp_choice_id = "";
-			$cc_addon ="";
-			$sameId ="";
+			$cc_addon = "";
+			$sameId = "";
 
-			$sss_id ="";
-			$aaa_id ="";
-			$ccc_id ="";
+			$sss_id = "";
+			$aaa_id = "";
+			$ccc_id = "";
 
 			if ($uomId == 0) {
 				$uom_id = null;
@@ -3366,19 +3368,19 @@ class AppModel extends CI_Model
 			$selectedSideDrinks = str_replace($search1, $replacewith1, $selectedSideDrinks);
 
 			$addon_sides_array  = explode(',', $selectedSideSides);
-			
+
 			$addon_dessert_array = explode(',', $selectedSideDessert);
-	
+
 			$addonn_drinks_array = explode(',', $selectedSideDrinks);
-	
+
 			$addon_idd  = explode(',', $selectedSideItems);
 
 			$addon_uom_idd = explode(',', $selectedSideItemsUom);
 			$addon_price  = explode(',', $selectedSideOnPrice);
-			
+
 			$aa_id = count($addon_idd);
 
-			
+
 
 			$s = array(" ");
 			$r = array();
@@ -3400,7 +3402,7 @@ class AppModel extends CI_Model
 				$suggestionIdTos,
 				$suggestionIdTon,
 				$suggestionIdTops,
-				$suggestionIdCoi,	
+				$suggestionIdCoi,
 				$suggestionIdCoslfm,
 				$suggestionIdSink,
 				$suggestionIdBcf,
@@ -3442,7 +3444,7 @@ class AppModel extends CI_Model
 			$c_id = count($choice_id);
 
 			$choice_uom_idd = str_replace($ss, $rr, $choices_uom_id);
-			
+
 			$choice_uom_id = array_values(array_filter($choice_uom_idd));
 			$cuom_id = count($choice_uom_id);
 
@@ -3456,7 +3458,7 @@ class AppModel extends CI_Model
 
 			$c_uom_id = str_replace($s, $r, $addon_uom_idd);
 			$uom = str_replace($ss, $rr, $c_uom_id);
-			$arr = array_values(array_filter($uom));	
+			$arr = array_values(array_filter($uom));
 			$auom_id = count($arr);
 
 			$sides_c = str_replace($s, $r, $addon_sides_array);
@@ -3472,7 +3474,7 @@ class AppModel extends CI_Model
 			$dessert_ccc = array_values(array_filter($dessert_cc));
 			$drinks_ccc = array_values(array_filter($drinks_cc));
 
-		
+
 			$sides_count = count($sides_ccc);
 			$dessert_count = count($dessert_ccc);
 			$drinks_count = count($drinks_ccc);
@@ -3492,11 +3494,11 @@ class AppModel extends CI_Model
 			echo "ang dessert_count kay $dessert_count\n";
 			echo "ang drinks_count kay $drinks_count\n";
 			echo "ang all addons selected kay $all_addons_count\n";
-			
+
 
 			$quantity = 0;
 			$total = 0.00;
-			
+
 			$this->db->select('*');
 			$this->db->from('app_customer_temp_orders as appCart');
 			$this->db->where('appCart.customerId', $userID);
@@ -3511,18 +3513,18 @@ class AppModel extends CI_Model
 				$addonCountIfSame = false;
 				$boolAddonsIfExist = false;
 				$boolAddonsIfSame = false;
-				$tempIdAddons ="";
-				
+				$tempIdAddons = "";
+
 
 				$choicesCountIfSame = false;
 				$boolChoicesIfExist = false;
 				$boolChoicesIfSame = false;
-				$tempIdChoices ="";
+				$tempIdChoices = "";
 
 				$suggestionsCountIfSame = false;
 				$boolSuggestionsIfExist = false;
 				$boolSuggestionsIfSame = false;
-				$tempIdsuggestions ="";
+				$tempIdsuggestions = "";
 
 				$addonsResult = array('exist' => $boolAddonsIfExist, 'same' => $boolAddonsIfSame, 'temp_id' => $tempIdAddons);
 				$choicesResult = array('exist' => $boolChoicesIfExist, 'same' => $boolChoicesIfSame, 'temp_id' => $tempIdChoices);
@@ -3535,7 +3537,6 @@ class AppModel extends CI_Model
 
 					$quantity = $value['quantity'];
 					$total = $value['total_price'];
-				
 				}
 
 				if ($checkAddonIfEmpty == true) {
@@ -3555,7 +3556,6 @@ class AppModel extends CI_Model
 						$this->db->where('product_id', $prodId);
 						$this->db->where('id', $temp_id);
 						$this->db->update('app_customer_temp_orders');
-
 					} else {
 
 						$this->db->set('quantity', $_counter + $quantity);
@@ -3564,11 +3564,7 @@ class AppModel extends CI_Model
 						$this->db->where('customerId', $userID);
 						$this->db->where('product_id', $prodId);
 						$this->db->update('app_customer_temp_orders');
-				
 					}
-
-					
-
 				} else if ($s_id == 0 && $a_id == 0 && $c_id == 0) {
 
 					$price = "";
@@ -3581,7 +3577,6 @@ class AppModel extends CI_Model
 					$this->db->where('customerId', $userID);
 					$this->db->where('product_id', $prodId);
 					$this->db->update('app_customer_temp_orders');
-
 				} else if ($uom_id != null && $checkAddonIfEmpty == false) {
 					echo "update ug naay uom with addons\n";
 					echo "$uomId\n";
@@ -3590,8 +3585,8 @@ class AppModel extends CI_Model
 					$temp_id_uom = "";
 					$temp_id_uom_addons = "";
 					$temp_id_uom_choices = "";
-					$temp_id_uom_suggestions= "";
-					$temp_id_uom_all ="";
+					$temp_id_uom_suggestions = "";
+					$temp_id_uom_all = "";
 					// $uom_idd ="";
 
 					foreach ($res as $key => $value) {
@@ -3599,7 +3594,7 @@ class AppModel extends CI_Model
 							$temp_id_uom = $value['id'];
 						}
 					}
-					
+
 					$this->db->select('*');
 					$this->db->from('app_customer_temp_orders as temp_orders');
 					$this->db->where('customerId', $userID);
@@ -3614,7 +3609,7 @@ class AppModel extends CI_Model
 					$this->db->group_by('id');
 					$query1 = $this->db->get();
 					$addons = $query1->result_array();
-					
+
 					$this->db->select('*, count(choice_id) as c_choice, count(uom_id) as c_uom, temp_order_id as temp_id');
 					$this->db->from('app_customer_temp_order_choices as temp_choices');
 					$this->db->where("temp_choices.temp_order_id in(SELECT id FROM app_customer_temp_orders where customerId = '$userID' and product_id = '$prodId')");
@@ -3630,16 +3625,16 @@ class AppModel extends CI_Model
 					$query3 = $this->db->get();
 					$suggestions = $query3->result_array();
 
-						$db_sides_count = 0;
-						$db_dessert_count = 0;
-						$db_drinks_count = 0;
-						$array_addons = [];
-						$qty = 0;
+					$db_sides_count = 0;
+					$db_dessert_count = 0;
+					$db_drinks_count = 0;
+					$array_addons = [];
+					$qty = 0;
 
-						
+
 
 					///for addons
-					foreach($addons as $key => $addonValue) {
+					foreach ($addons as $key => $addonValue) {
 
 						$db_sides_count = $addons[$key]['c_sides'];
 						$db_dessert_count = $addons[$key]['c_dessert'];
@@ -3673,11 +3668,10 @@ class AppModel extends CI_Model
 								$addon_uom_idd,
 								$addon_price,
 								$a_id,
-								$auom_id);
-					
-								$addonsResult = $checkAddonsIfExist;
+								$auom_id
+							);
 
-
+							$addonsResult = $checkAddonsIfExist;
 						} else if ($addonCountIfSame == true || $addonCountIfSame == false) {
 							// echo "naay same sides\n";
 
@@ -3689,12 +3683,11 @@ class AppModel extends CI_Model
 								$addon_uom_idd,
 								$addon_price,
 								$a_id,
-								$auom_id);
+								$auom_id
+							);
 
-								$addonsResult = $checkAddonsIfExist;
-
-						} 
-						
+							$addonsResult = $checkAddonsIfExist;
+						}
 					}
 
 					// echo print_r($addonsResult);
@@ -3702,7 +3695,7 @@ class AppModel extends CI_Model
 
 					///for choices
 					$temp_id_choice = [];
-					foreach($choices as $key => $choiceValue) {
+					foreach ($choices as $key => $choiceValue) {
 
 						$temp_with_addons = "";
 						$temp_without_addons = "";
@@ -3717,15 +3710,14 @@ class AppModel extends CI_Model
 
 						echo "price $price\n";
 
-						if($price == $uomPrice) {
+						if ($price == $uomPrice) {
 							$temp_id_p = $choices[$key]['temp_id'];
 							echo "temp_id_p $temp_id_p\n";
 						}
 
 						if ($c_id == $db_choice_count && $cuom_id == $db_uom_count) {
 							$temp_id_uom_choices = $choiceValue['temp_id'];
-
-						} 
+						}
 
 						$this->db->select('*');
 						$this->db->from('app_customer_temp_order_addons');
@@ -3740,12 +3732,12 @@ class AppModel extends CI_Model
 							$temp_with_addons = $choiceValue['temp_id'];
 							echo "temp_with_addons $temp_with_addons\n";
 						}
-						
+
 						if (($temp_without_addons == $temp_id_uom) == $temp_id_p) {
 							$temp_without = $choiceValue['temp_id'];
 
 							echo "temp_without $temp_without\n";
-						} 
+						}
 
 						if (($temp_with_addons == $temp_id_uom) == $temp_id_p) {
 							$temp_with = $choiceValue['temp_id'];
@@ -3763,15 +3755,16 @@ class AppModel extends CI_Model
 							$c_id,
 							$cuom_id,
 							$all_addons_count,
-							$a_id);
+							$a_id
+						);
 
-							$choicesResult = $checkChoicesIfExist;
+						$choicesResult = $checkChoicesIfExist;
 
-							// echo print_r($suggestionsResult);
-							echo "\n";
+						// echo print_r($suggestionsResult);
+						echo "\n";
 
-							$temp_id_choices = $choicesResult['temp_id'];
-							$temp_id_choice[] = $temp_id_choices;
+						$temp_id_choices = $choicesResult['temp_id'];
+						$temp_id_choice[] = $temp_id_choices;
 					}
 
 					// echo print_r($choicesResult);
@@ -3780,37 +3773,37 @@ class AppModel extends CI_Model
 
 					///for suggestion
 					$temp_id_suggest = [];
-					foreach($suggestions as $key => $suggestionValue) {
+					foreach ($suggestions as $key => $suggestionValue) {
 
 						$temp_with_addons = "";
 						$temp_without_addons = "";
 						$temp_with = "";
 						$temp_without = "";
 						$temp_idd = "";
-						$temp_id ="";
-						$temp_id_p ="";
+						$temp_id = "";
+						$temp_id_p = "";
 						$db_suggestion_count = $suggestions[$key]['c_suggestion'];
 						$price = $tempOrder[$key]['price'];
 
 						echo "price $price\n";
 
-						if($price == $uomPrice) {
+						if ($price == $uomPrice) {
 							$temp_id_p = $suggestions[$key]['temp_id'];
 							echo "temp_id_p $temp_id_p\n";
 						}
-						
+
 						if ($s_id == $db_suggestion_count) {
 							// echo "found count for suggestion\n";
 							$temp_id_uom_suggestions = $suggestions[$key]['temp_id'];
 							echo "temp_id $temp_id\n";
-						} 
+						}
 
 						$this->db->select('*');
 						$this->db->from('app_customer_temp_order_addons');
 						$this->db->where('temp_order_id', $temp_id_uom_suggestions);
 						$query4 = $this->db->get();
 						$res4 = $query4->result_array();
-						
+
 						if (empty($res4)) {
 							$temp_without_addons = $suggestionValue['temp_id'];
 							echo "temp_without_addons $temp_without_addons\n";
@@ -3824,7 +3817,7 @@ class AppModel extends CI_Model
 							$temp_without = $suggestionValue['temp_id'];
 
 							echo "temp_without $temp_without\n";
-						} 
+						}
 
 						if (($temp_with_addons == $temp_id_uom) == $temp_id_p) {
 							$temp_with = $suggestionValue['temp_id'];
@@ -3842,16 +3835,16 @@ class AppModel extends CI_Model
 							$s_id,
 							$ps_id,
 							$all_addons_count,
-							$a_id);
-	
+							$a_id
+						);
+
 						$suggestionsResult = $checkSuggestionsIfExist;
-	
+
 						echo print_r($suggestionsResult);
 						echo "\n";
 
 						$temp_id_suggestions = $suggestionsResult['temp_id'];
 						$temp_id_suggest[] = $temp_id_suggestions;
-					
 					}
 
 					// echo "temp_id_suggestions $temp_id_suggestions\n";
@@ -3863,14 +3856,14 @@ class AppModel extends CI_Model
 					echo "\n";
 
 					$temp_idd_suggest = str_replace($s, $r, $temp_id_suggest);
-					$temp_idd_s = implode("",$temp_idd_suggest);
+					$temp_idd_s = implode("", $temp_idd_suggest);
 					echo "$temp_idd_s\n";
 
 					$temp_idd_choice = str_replace($s, $r, $temp_id_choice);
-					$temp_idd_c = implode("",$temp_idd_choice);
+					$temp_idd_c = implode("", $temp_idd_choice);
 					echo "$temp_idd_c\n";
 
-		
+
 					$temp_id_addons = $addonsResult['temp_id'];
 					echo "$temp_id_addons\n";
 
@@ -3888,90 +3881,89 @@ class AppModel extends CI_Model
 						echo "update with uom\n";
 
 						$this->updateCartQty_mod2($db_all_addons_selected_im, $_counter);
-
 					} else if ($all_addons_selected != $db_all_addons_selected) {
 						echo "add new\n";
 
-					$this->addNew(
-							$userID, 
-							$prodId, 
-							$uomId, 
-							$_counter, 
+						$this->addNew(
+							$userID,
+							$prodId,
+							$uomId,
+							$_counter,
 							$uomPrice,
-							$measurement, 
-					
+							$measurement,
+
 							$choiceUomIdDrinks,
-							$choiceIdDrinks, 
-							$choicePriceDrinks, 
-					
+							$choiceIdDrinks,
+							$choicePriceDrinks,
+
 							$choiceUomIdFries,
-							$choiceIdFries, 
+							$choiceIdFries,
 							$choicePriceFries,
-					
+
 							$choiceUomIdSides,
-							$choiceIdSides, 
+							$choiceIdSides,
 							$choicePriceSides,
-					
+
 							$suggestionIdFlavor,
 							$productSuggestionIdFlavor,
 							$suggestionPriceFlavor,
-					
+
 							$suggestionIdWoc,
 							$productSuggestionIdWoc,
 							$suggestionPriceWoc,
-					
+
 							$suggestionIdTos,
 							$productSuggestionIdTos,
 							$suggestionPriceTos,
-					
+
 							$suggestionIdTon,
 							$productSuggestionIdTon,
 							$suggestionPriceTon,
-					
+
 							$suggestionIdTops,
 							$productSuggestionIdTops,
 							$suggestionPriceTops,
-					
+
 							$suggestionIdCoi,
 							$productSuggestionIdCoi,
 							$suggestionPriceCoi,
-					
+
 							$suggestionIdCoslfm,
 							$productSuggestionIdCoslfm,
 							$suggestionPriceCoslfm,
-					
+
 							$suggestionIdSink,
 							$productSuggestionIdSink,
 							$suggestionPriceSink,
-					
+
 							$suggestionIdBcf,
 							$productSuggestionIdBcf,
 							$suggestionPriceBcf,
-					
+
 							$suggestionIdCc,
 							$productSuggestionIdCc,
 							$suggestionPriceCc,
-					
+
 							$suggestionIdCom,
 							$productSuggestionIdCom,
 							$suggestionPriceCom,
-					
+
 							$suggestionIdCoft,
 							$productSuggestionIdCoft,
 							$suggestionPriceCoft,
-					
+
 							$suggestionIdCymf,
 							$productSuggestionIdCymf,
 							$suggestionPriceCymf,
-						
+
 							$suggestionIdTomb,
 							$productSuggestionIdTomb,
 							$suggestionPriceTomb,
-					
+
 							$suggestionIdCosv,
 							$productSuggestionIdCosv,
 							$suggestionPriceCosv,
-					
+
 							$suggestionIdTop,
 							$productSuggestionIdTop,
 							$suggestionPriceTop,
@@ -3983,18 +3975,17 @@ class AppModel extends CI_Model
 							$suggestionIdNameless,
 							$productSuggestionIdNameless,
 							$suggestionPriceNameless,
-					
-							$selectedSideOnPrice, 
-							$selectedSideItems, 
+
+							$selectedSideOnPrice,
+							$selectedSideItems,
 							$selectedSideItemsUom,
-					
+
 							$selectedSideSides,
 							$selectedSideDessert,
-							$selectedSideDrinks);
-				
+							$selectedSideDrinks
+						);
 					}
-
-				} else if ($uom_id == null) {	
+				} else if ($uom_id == null) {
 
 					$price = "";
 
@@ -4014,7 +4005,7 @@ class AppModel extends CI_Model
 					$this->db->group_by('id');
 					$query1 = $this->db->get();
 					$addons = $query1->result_array();
-					
+
 					$this->db->select('*, count(choice_id) as c_choice, count(uom_id) as c_uom, temp_order_id as temp_id');
 					$this->db->from('app_customer_temp_order_choices as temp_choices');
 					$this->db->where("temp_choices.temp_order_id in(SELECT id FROM app_customer_temp_orders where customerId = '$userID' and product_id = '$prodId')");
@@ -4030,18 +4021,18 @@ class AppModel extends CI_Model
 					$query3 = $this->db->get();
 					$suggestions = $query3->result_array();
 
-						$db_sides_count = 0;
-						$db_dessert_count = 0;
-						$db_drinks_count = 0;
-						$array_addons = [];
+					$db_sides_count = 0;
+					$db_dessert_count = 0;
+					$db_drinks_count = 0;
+					$array_addons = [];
 
 					///for addons
-					foreach($addons as $key => $addonValue) {
+					foreach ($addons as $key => $addonValue) {
 
 						$db_sides_count = $addons[$key]['c_sides'];
 						$db_dessert_count = $addons[$key]['c_dessert'];
 						$db_drinks_count = $addons[$key]['c_drinks'];
-			
+
 						if ($sides_count == $db_sides_count && $dessert_count == $db_dessert_count && $drinks_count == $db_drinks_count) {
 							// echo "found\n";
 							$temp_id = $addonValue['temp_id'];
@@ -4064,11 +4055,10 @@ class AppModel extends CI_Model
 								$addon_uom_idd,
 								$addon_price,
 								$a_id,
-								$auom_id);
-					
-								$addonsResult = $checkAddonsIfExist;
+								$auom_id
+							);
 
-
+							$addonsResult = $checkAddonsIfExist;
 						} else if ($addonCountIfSame == true || $addonCountIfSame == false) {
 							// echo "naay same sides\n";
 
@@ -4080,12 +4070,11 @@ class AppModel extends CI_Model
 								$addon_uom_idd,
 								$addon_price,
 								$a_id,
-								$auom_id);
+								$auom_id
+							);
 
-								$addonsResult = $checkAddonsIfExist;
-
-						} 
-						
+							$addonsResult = $checkAddonsIfExist;
+						}
 					}
 
 					// echo print_r($addonsResult);
@@ -4093,7 +4082,7 @@ class AppModel extends CI_Model
 
 					///for choices
 					$temp_id_choice = [];
-					foreach($choices as $key => $choiceValue) {
+					foreach ($choices as $key => $choiceValue) {
 
 						$temp_with_addons = "";
 						$temp_without_addons = "";
@@ -4110,10 +4099,9 @@ class AppModel extends CI_Model
 
 						if ($c_id == $db_choice_count && $cuom_id == $db_uom_count) {
 							$temp_id = $choiceValue['temp_id'];
+						}
 
-						} 
-
-						if($price == $uomPrice) {
+						if ($price == $uomPrice) {
 							$temp_id_p = $choices[$key]['temp_id'];
 							echo "temp_id_p $temp_id_p\n";
 						}
@@ -4131,12 +4119,12 @@ class AppModel extends CI_Model
 							$temp_with_addons = $choiceValue['temp_id'];
 							echo "temp_with_addons $temp_with_addons\n";
 						}
-						
+
 						if (($temp_without_addons == $temp_id) == $temp_id_p) {
 							$temp_without = $choiceValue['temp_id'];
 
 							echo "temp_without $temp_without\n";
-						} 
+						}
 
 						if (($temp_with_addons == $temp_id) == $temp_id_p) {
 							$temp_with = $choiceValue['temp_id'];
@@ -4154,15 +4142,16 @@ class AppModel extends CI_Model
 							$c_id,
 							$cuom_id,
 							$all_addons_count,
-							$a_id);
+							$a_id
+						);
 
-							$choicesResult = $checkChoicesIfExist;
+						$choicesResult = $checkChoicesIfExist;
 
-							// echo print_r($suggestionsResult);
-							echo "\n";
+						// echo print_r($suggestionsResult);
+						echo "\n";
 
-							$temp_id_choices = $choicesResult['temp_id'];
-							$temp_id_choice[] = $temp_id_choices;
+						$temp_id_choices = $choicesResult['temp_id'];
+						$temp_id_choice[] = $temp_id_choices;
 					}
 
 					// echo print_r($choicesResult);
@@ -4171,38 +4160,38 @@ class AppModel extends CI_Model
 
 					///for suggestion
 					$temp_id_suggest = [];
-					foreach($suggestions as $key => $suggestionValue) {
+					foreach ($suggestions as $key => $suggestionValue) {
 
 						$temp_with_addons = "";
 						$temp_without_addons = "";
 						$temp_with = "";
 						$temp_without = "";
 						$temp_idd = "";
-						$temp_id ="";
-						$temp_id_p ="";
+						$temp_id = "";
+						$temp_id_p = "";
 						$db_suggestion_count = $suggestions[$key]['c_suggestion'];
 						$price = $tempOrder[$key]['price'];
 
 						echo "price $price\n";
 
-						if($price == $uomPrice) {
+						if ($price == $uomPrice) {
 							$temp_id_p = $suggestions[$key]['temp_id'];
 							echo "temp_id_p $temp_id_p\n";
 						}
 
-						
+
 						if ($s_id == $db_suggestion_count) {
 							// echo "found count for suggestion\n";
 							$temp_id = $suggestions[$key]['temp_id'];
 							echo "temp_id $temp_id\n";
-						} 
+						}
 
 						$this->db->select('*');
 						$this->db->from('app_customer_temp_order_addons');
 						$this->db->where('temp_order_id', $temp_id);
 						$query4 = $this->db->get();
 						$res4 = $query4->result_array();
-						
+
 						if (empty($res4)) {
 							$temp_without_addons = $suggestionValue['temp_id'];
 							echo "temp_without_addons $temp_without_addons\n";
@@ -4216,7 +4205,7 @@ class AppModel extends CI_Model
 							$temp_without = $suggestionValue['temp_id'];
 
 							echo "temp_without $temp_without\n";
-						} 
+						}
 
 						if (($temp_with_addons == $temp_id) == $temp_id_p) {
 							$temp_with = $suggestionValue['temp_id'];
@@ -4234,16 +4223,16 @@ class AppModel extends CI_Model
 							$s_id,
 							$ps_id,
 							$all_addons_count,
-							$a_id);
-	
+							$a_id
+						);
+
 						$suggestionsResult = $checkSuggestionsIfExist;
-	
+
 						echo print_r($suggestionsResult);
 						echo "\n";
 
 						$temp_id_suggestions = $suggestionsResult['temp_id'];
 						$temp_id_suggest[] = $temp_id_suggestions;
-					
 					}
 
 					// echo "temp_id_suggestions $temp_id_suggestions\n";
@@ -4255,14 +4244,14 @@ class AppModel extends CI_Model
 					echo "\n";
 
 					$temp_idd_suggest = str_replace($s, $r, $temp_id_suggest);
-					$temp_idd_s = implode("",$temp_idd_suggest);
+					$temp_idd_s = implode("", $temp_idd_suggest);
 					echo "$temp_idd_s\n";
 
 					$temp_idd_choice = str_replace($s, $r, $temp_id_choice);
-					$temp_idd_c = implode("",$temp_idd_choice);
+					$temp_idd_c = implode("", $temp_idd_choice);
 					echo "$temp_idd_c\n";
 
-		
+
 					$temp_id_addons = $addonsResult['temp_id'];
 					echo "$temp_id_addons\n";
 
@@ -4280,90 +4269,89 @@ class AppModel extends CI_Model
 						echo "update\n";
 
 						$this->updateCartQty_mod2($db_all_addons_selected_im, $_counter);
-
 					} else if ($all_addons_selected != $db_all_addons_selected) {
 						echo "add new\n";
 
-					$this->addNew(
-							$userID, 
-							$prodId, 
-							$uomId, 
-							$_counter, 
-							$uomPrice, 
+						$this->addNew(
+							$userID,
+							$prodId,
+							$uomId,
+							$_counter,
+							$uomPrice,
 							$measurement,
-					
+
 							$choiceUomIdDrinks,
-							$choiceIdDrinks, 
-							$choicePriceDrinks, 
-					
+							$choiceIdDrinks,
+							$choicePriceDrinks,
+
 							$choiceUomIdFries,
-							$choiceIdFries, 
+							$choiceIdFries,
 							$choicePriceFries,
-					
+
 							$choiceUomIdSides,
-							$choiceIdSides, 
+							$choiceIdSides,
 							$choicePriceSides,
-					
+
 							$suggestionIdFlavor,
 							$productSuggestionIdFlavor,
 							$suggestionPriceFlavor,
-					
+
 							$suggestionIdWoc,
 							$productSuggestionIdWoc,
 							$suggestionPriceWoc,
-					
+
 							$suggestionIdTos,
 							$productSuggestionIdTos,
 							$suggestionPriceTos,
-					
+
 							$suggestionIdTon,
 							$productSuggestionIdTon,
 							$suggestionPriceTon,
-					
+
 							$suggestionIdTops,
 							$productSuggestionIdTops,
 							$suggestionPriceTops,
-					
+
 							$suggestionIdCoi,
 							$productSuggestionIdCoi,
 							$suggestionPriceCoi,
-					
+
 							$suggestionIdCoslfm,
 							$productSuggestionIdCoslfm,
 							$suggestionPriceCoslfm,
-					
+
 							$suggestionIdSink,
 							$productSuggestionIdSink,
 							$suggestionPriceSink,
-					
+
 							$suggestionIdBcf,
 							$productSuggestionIdBcf,
 							$suggestionPriceBcf,
-					
+
 							$suggestionIdCc,
 							$productSuggestionIdCc,
 							$suggestionPriceCc,
-					
+
 							$suggestionIdCom,
 							$productSuggestionIdCom,
 							$suggestionPriceCom,
-					
+
 							$suggestionIdCoft,
 							$productSuggestionIdCoft,
 							$suggestionPriceCoft,
-					
+
 							$suggestionIdCymf,
 							$productSuggestionIdCymf,
 							$suggestionPriceCymf,
-						
+
 							$suggestionIdTomb,
 							$productSuggestionIdTomb,
 							$suggestionPriceTomb,
-					
+
 							$suggestionIdCosv,
 							$productSuggestionIdCosv,
 							$suggestionPriceCosv,
-					
+
 							$suggestionIdTop,
 							$productSuggestionIdTop,
 							$suggestionPriceTop,
@@ -4375,101 +4363,100 @@ class AppModel extends CI_Model
 							$suggestionIdNameless,
 							$productSuggestionIdNameless,
 							$suggestionPriceNameless,
-					
-							$selectedSideOnPrice, 
-							$selectedSideItems, 
+
+							$selectedSideOnPrice,
+							$selectedSideItems,
 							$selectedSideItemsUom,
-					
+
 							$selectedSideSides,
 							$selectedSideDessert,
-							$selectedSideDrinks);
-				
+							$selectedSideDrinks
+						);
 					}
 				}
-
 			} else {
 				echo "false";
 
 				$this->addNew(
-					$userID, 
-					$prodId, 
-					$uomId, 
-					$_counter, 
-					$uomPrice, 
+					$userID,
+					$prodId,
+					$uomId,
+					$_counter,
+					$uomPrice,
 					$measurement,
-			
+
 					$choiceUomIdDrinks,
-					$choiceIdDrinks, 
-					$choicePriceDrinks, 
-			
+					$choiceIdDrinks,
+					$choicePriceDrinks,
+
 					$choiceUomIdFries,
-					$choiceIdFries, 
+					$choiceIdFries,
 					$choicePriceFries,
-			
+
 					$choiceUomIdSides,
-					$choiceIdSides, 
+					$choiceIdSides,
 					$choicePriceSides,
-			
+
 					$suggestionIdFlavor,
 					$productSuggestionIdFlavor,
 					$suggestionPriceFlavor,
-			
+
 					$suggestionIdWoc,
 					$productSuggestionIdWoc,
 					$suggestionPriceWoc,
-			
+
 					$suggestionIdTos,
 					$productSuggestionIdTos,
 					$suggestionPriceTos,
-			
+
 					$suggestionIdTon,
 					$productSuggestionIdTon,
 					$suggestionPriceTon,
-			
+
 					$suggestionIdTops,
 					$productSuggestionIdTops,
 					$suggestionPriceTops,
-			
+
 					$suggestionIdCoi,
 					$productSuggestionIdCoi,
 					$suggestionPriceCoi,
-			
+
 					$suggestionIdCoslfm,
 					$productSuggestionIdCoslfm,
 					$suggestionPriceCoslfm,
-			
+
 					$suggestionIdSink,
 					$productSuggestionIdSink,
 					$suggestionPriceSink,
-			
+
 					$suggestionIdBcf,
 					$productSuggestionIdBcf,
 					$suggestionPriceBcf,
-			
+
 					$suggestionIdCc,
 					$productSuggestionIdCc,
 					$suggestionPriceCc,
-			
+
 					$suggestionIdCom,
 					$productSuggestionIdCom,
 					$suggestionPriceCom,
-			
+
 					$suggestionIdCoft,
 					$productSuggestionIdCoft,
 					$suggestionPriceCoft,
-			
+
 					$suggestionIdCymf,
 					$productSuggestionIdCymf,
 					$suggestionPriceCymf,
-				
+
 					$suggestionIdTomb,
 					$productSuggestionIdTomb,
 					$suggestionPriceTomb,
-			
+
 					$suggestionIdCosv,
 					$productSuggestionIdCosv,
 					$suggestionPriceCosv,
-			
+
 					$suggestionIdTop,
 					$productSuggestionIdTop,
 					$suggestionPriceTop,
@@ -4481,26 +4468,27 @@ class AppModel extends CI_Model
 					$suggestionIdNameless,
 					$productSuggestionIdNameless,
 					$suggestionPriceNameless,
-			
-					$selectedSideOnPrice, 
-					$selectedSideItems, 
+
+					$selectedSideOnPrice,
+					$selectedSideItems,
 					$selectedSideItemsUom,
-			
+
 					$selectedSideSides,
 					$selectedSideDessert,
-					$selectedSideDrinks);
+					$selectedSideDrinks
+				);
 			}
 
 			$this->db->trans_complete();
-			
 		} catch (\Exception $th) {
 			$this->db->trans_rollback();
 		}
 	}
 
-	private function ifExist($addon_side, $addon_sides){
+	private function ifExist($addon_side, $addon_sides)
+	{
 		if ($addon_side == $addon_sides) {
-		
+
 			return true;
 		} else {
 			return false;
@@ -4508,28 +4496,28 @@ class AppModel extends CI_Model
 	}
 
 	private function addNew(
-		$userID, 
-		$prodId, 
-		$uomId, 
-		$_counter, 
-		$uomPrice, 
+		$userID,
+		$prodId,
+		$uomId,
+		$_counter,
+		$uomPrice,
 		$measurement,
 
 		$choiceUomIdDrinks,
-		$choiceIdDrinks, 
-		$choicePriceDrinks, 
+		$choiceIdDrinks,
+		$choicePriceDrinks,
 
 		$choiceUomIdFries,
-		$choiceIdFries, 
+		$choiceIdFries,
 		$choicePriceFries,
 
 		$choiceUomIdSides,
-		$choiceIdSides, 
+		$choiceIdSides,
 		$choicePriceSides,
 
 		$suggestionIdFlavor,
-      	$productSuggestionIdFlavor,
-      	$suggestionPriceFlavor,
+		$productSuggestionIdFlavor,
+		$suggestionPriceFlavor,
 
 		$suggestionIdWoc,
 		$productSuggestionIdWoc,
@@ -4578,7 +4566,7 @@ class AppModel extends CI_Model
 		$suggestionIdCymf,
 		$productSuggestionIdCymf,
 		$suggestionPriceCymf,
-	
+
 		$suggestionIdTomb,
 		$productSuggestionIdTomb,
 		$suggestionPriceTomb,
@@ -4599,15 +4587,14 @@ class AppModel extends CI_Model
 		$productSuggestionIdNameless,
 		$suggestionPriceNameless,
 
-		$selectedSideOnPrice, 
-		$selectedSideItems, 
+		$selectedSideOnPrice,
+		$selectedSideItems,
 		$selectedSideItemsUom,
 
 		$selectedSideSides,
 		$selectedSideDessert,
 		$selectedSideDrinks
-	)
-	{
+	) {
 
 		if ($uomId == 0) {
 			$uomId = null;
@@ -4624,7 +4611,7 @@ class AppModel extends CI_Model
 		if ($choiceUomIdSides == 0) {
 			$choiceUomIdSides = null;
 		}
-	
+
 		$datamain = array(
 			'customerId'  => $userID,
 			'product_id'  => $prodId,
@@ -4666,13 +4653,13 @@ class AppModel extends CI_Model
 				$addon_sides = $addon_sides_array[$x]  == 0 ? null : $addon_sides_array[$x];;
 				$addon_dessert = $addon_dessert_array[$x]  == 0 ? null : $addon_dessert_array[$x];;
 				$addon_drinks = $addonn_drinks_array[$x]  == 0 ? null : $addonn_drinks_array[$x];;
-				
+
 				// if($side_id == 'null' || $uom_id == 'null' || $add_price == 'null'){
 				// 	$side_id = null;
 				// 	$uom_id = null;
 				// 	$add_price = null;
 				// }
-				
+
 				$addons = array(
 					'temp_order_id' => $insert_id,
 					'addon_id' => $side_id,
@@ -4745,8 +4732,8 @@ class AppModel extends CI_Model
 
 			$totalAdChoice += $suggestionPriceFlavor;
 		}
-		
-		
+
+
 		if ($suggestionIdWoc != 0) {
 			$suggestionWoc = array(
 				'temp_order_id' => $insert_id,
@@ -4985,7 +4972,7 @@ class AppModel extends CI_Model
 			$totalAdChoice += $suggestionPriceNameless;
 		}
 
-		
+
 		$x = $totalAdChoice * (int) $_counter;
 
 		$this->db->set('total_price', $x);
@@ -4993,7 +4980,7 @@ class AppModel extends CI_Model
 		$this->db->update('app_customer_temp_orders');
 	}
 
-	private function checkAddonIfEmpty($product_id) 
+	private function checkAddonIfEmpty($product_id)
 	{
 
 		$this->db->select('*');
@@ -5014,13 +5001,11 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res3 = $query->row_array();
 
-		if(empty($res1) && empty($res2) && empty($res3)) {
+		if (empty($res1) && empty($res2) && empty($res3)) {
 			return true;
 		} else {
 			return false;
 		}
-
-		
 	}
 
 	private function checkSuggestionsIfExist(
@@ -5033,20 +5018,20 @@ class AppModel extends CI_Model
 		$s_id,
 		$ps_id,
 		$all_addons_count,
-		$a_id)
-	{
-	
+		$a_id
+	) {
 
-		
+
+
 		$c_suggestion = "";
 		$cc_suggestion = "";
-		$c_prod_suggestion ="";
-		$cc_prod_suggestion ="";
+		$c_prod_suggestion = "";
+		$cc_prod_suggestion = "";
 
-		$tempIdSuggestion ="";
-		$tempIdProdSuggestion ="";
-		$tempIdSuggestions ="";
-		$tempIdSuggestionss ="";
+		$tempIdSuggestion = "";
+		$tempIdProdSuggestion = "";
+		$tempIdSuggestions = "";
+		$tempIdSuggestionss = "";
 
 		$ifExist = false;
 		$ifSame = false;
@@ -5062,11 +5047,11 @@ class AppModel extends CI_Model
 			$this->db->where_in('temp_order_id', $temp_without);
 			$query = $this->db->get();
 			$res = $query->result_array();
-	
+
 			if (!empty($res)) {
 				$ifExist = true;
 			}
-	
+
 			$this->db->select('*, count(suggestion_id) as cc_suggestion, temp_order_id as temp_id');
 			$this->db->from('app_customer_temp_order_suggestions as temp_suggestions');
 			$this->db->where("temp_order_id in(SELECT id FROM app_customer_temp_orders where customerId = '$userID' and product_id ='$prodId')");
@@ -5074,7 +5059,7 @@ class AppModel extends CI_Model
 			$this->db->where_in('suggestion_id', $suggestions_id);
 			$query1 = $this->db->get();
 			$res1 = $query1->result_array();
-	
+
 			$this->db->select('*, count(product_suggestion_id) as cc_prod_suggestion, temp_order_id as temp_idf');
 			$this->db->from('app_customer_temp_order_suggestions as temp_suggestions');
 			$this->db->where("temp_order_id in(SELECT id FROM app_customer_temp_orders where customerId = '$userID' and product_id ='$prodId')");
@@ -5082,13 +5067,13 @@ class AppModel extends CI_Model
 			$this->db->where_in('product_suggestion_id', $product_suggestions_id);
 			$query2 = $this->db->get();
 			$res2 = $query2->result_array();
-	
+
 			foreach ($res as $key => $suggestionValue) {
 
 				$c_suggestion = $res[$key]['c_suggestion'];
 				$cc_suggestion = $res1[$key]['cc_suggestion'];
 				$cc_product_suggestion = $res2[$key]['cc_prod_suggestion'];
-	
+
 				if (($c_suggestion && $cc_suggestion) == $s_id) {
 					$tempIdSuggestion = $res[$key]['temp_id'];
 					// echo "tempIdSuggestion $tempIdSuggestion\n";
@@ -5099,25 +5084,22 @@ class AppModel extends CI_Model
 					// echo "tempIdProdSuggestion $tempIdProdSuggestion\n";
 				}
 
-		
+
 				if (($tempIdSuggestion == $tempIdProdSuggestion)) {
 					$tempIdSuggestions = $res[$key]['temp_id'];
 					// echo "tempIdSuggestions $tempIdSuggestions\n";
-					
+
 					$ifSame = true;
-	
 				} else {
 
 					$tempIdSuggestions = null;
 					$ifSame = false;
 					echo "way same suggestion temp id\n";
-					
 				}
 			}
-			
+
 			$result = ['exist' => $ifExist, 'same' => $ifSame, 'temp_id' => $tempIdSuggestions];
 			return $result;
-
 		} else {
 
 			// echo "update with addons\n";
@@ -5164,31 +5146,27 @@ class AppModel extends CI_Model
 					$tempIdProdSuggestion = $res[$key]['temp_id'];
 					// echo "tempIdProdSuggestion $tempIdProdSuggestion\n";
 				}
-				
+
 
 				if ($tempIdSuggestion == $tempIdProdSuggestion) {
 					$tempIdSuggestions = $res[$key]['temp_id'];
 					echo "tempIdSuggestions $tempIdSuggestions\n";
 					$ifSame = true;
-				
-					
 				} else {
 					$tempIdSuggestions = null;
 					$ifSame = false;
 					// echo "way same suggestion temp id\n";
-					
-					
+
+
 				}
 			}
 
 			$result = ['exist' => $ifExist, 'same' => $ifSame, 'temp_id' => $tempIdSuggestions];
 			return $result;
 		}
-	
-		
 	}
 
-	private function checkSuggestionsIfSame($temp_id, $suggestion_id, $product_suggestion_id, $s_id) 
+	private function checkSuggestionsIfSame($temp_id, $suggestion_id, $product_suggestion_id, $s_id)
 	{
 		$this->db->select('count(suggestion_id) as suggestion, suggestion_id');
 		$this->db->from('app_customer_temp_order_suggestions');
@@ -5197,9 +5175,8 @@ class AppModel extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-		foreach($res as $key => $value) {
+		foreach ($res as $key => $value) {
 			$ccc_choice = $value['suggestion'];
-
 		}
 		// echo "ang choice id count kay $ccc_choice\n";
 		// echo "ang choice idd count kay $s_id\n";
@@ -5211,7 +5188,6 @@ class AppModel extends CI_Model
 			// echo "dili ka update\n";
 			return false;
 		}
-
 	}
 
 	private function checkChoicesIfExist(
@@ -5224,20 +5200,20 @@ class AppModel extends CI_Model
 		$c_id,
 		$cuom_id,
 		$all_addons_count,
-		$a_id) 
-	{
+		$a_id
+	) {
 
 		// echo "choices_temp_id $choices_temp_id\n";
 		echo "temp_withs $temp_with\n";
 		echo "temp_withouts $temp_without\n";
 		$c_choice = "";
 		$cc_choice = "";
-		$c_uom ="";
-		$cc_uom ="";
+		$c_uom = "";
+		$cc_uom = "";
 
-		$tempIdChoice ="";
-		$tempIdUomChoice ="";
-		$tempIdChoices ="";
+		$tempIdChoice = "";
+		$tempIdUomChoice = "";
+		$tempIdChoices = "";
 
 		$ifExist = false;
 		$ifSame = false;
@@ -5282,7 +5258,7 @@ class AppModel extends CI_Model
 				$c_choice = $res[$key]['c_choice'];
 				$cc_choice = $res1[$key]['cc_choice'];
 				$cc_uom = $res2[$key]['cc_uom'];
-				
+
 				if ($c_choice && $cc_choice == $c_id) {
 					$tempIdChoice = $choiceValue['temp_id'];
 					// echo "tempIdChoice $tempIdChoice\n"; 
@@ -5297,9 +5273,8 @@ class AppModel extends CI_Model
 					if ($tempIdChoice == $tempIdUomChoice) {
 						$tempIdChoices = $choiceValue['temp_id'];
 						echo "tempIdChoices $tempIdChoices\n";
-			
+
 						$ifSame = true;
-					
 					} else {
 						// echo "way same tempIdChoices\n";
 						$ifSame = false;
@@ -5310,13 +5285,12 @@ class AppModel extends CI_Model
 					$ifSame = false;
 					$tempIdChoices = null;
 					// echo "way sides_temp_id\n";
-					
+
 				}
 			}
 
 			$result = ['exist' => $ifExist, 'same' => $ifSame, 'temp_id' => $tempIdChoices];
 			return $result;
-
 		} else {
 
 			echo "update with addons\n";
@@ -5357,7 +5331,7 @@ class AppModel extends CI_Model
 				$c_choice = $res[$key]['c_choice'];
 				$cc_choice = $res1[$key]['cc_choice'];
 				$cc_uom = $res2[$key]['cc_uom'];
-				
+
 				if ($c_choice && $cc_choice == $c_id) {
 					$tempIdChoice = $choiceValue['temp_id'];
 					// echo "tempIdChoice $tempIdChoice\n"; 
@@ -5373,35 +5347,29 @@ class AppModel extends CI_Model
 					if ($tempIdChoice == $tempIdUomChoice) {
 						$tempIdChoices = $choiceValue['temp_id'];
 						// echo "tempIdChoices $tempIdChoices\n";
-			
-						$ifSame = true;
-						
 
+						$ifSame = true;
 					} else {
 
 						// echo "way same tempIdChoices\n";
 						$ifSame = false;
 						$tempIdChoices = null;
-						
 					}
-
 				} else {
 
 					$ifSame = false;
 					$tempIdChoices = null;
 					// echo "way sides_temp_id\n";
-					
+
 				}
 			}
-			
+
 			$result = ['exist' => $ifExist, 'same' => $ifSame, 'temp_id' => $tempIdChoices];
 			return $result;
 		}
-		
-		
 	}
 
-	private function getTempChoicesId($temp_id, $choice_id, $cc_choice, $choice_uom_idd) 
+	private function getTempChoicesId($temp_id, $choice_id, $cc_choice, $choice_uom_idd)
 	{
 		$this->db->select('count(choice_id) as choice, choice_id');
 		$this->db->from('app_customer_temp_order_choices');
@@ -5412,9 +5380,8 @@ class AppModel extends CI_Model
 		// echo "ag temp_id kay $temp_id\n";
 		// echo print_r($res);
 
-		foreach($res as $key => $value) {
+		foreach ($res as $key => $value) {
 			$ccc_choice = $value['choice'];
-
 		}
 		echo "ang choice id count kay $ccc_choice\n";
 		echo "ang choice idd count kay $cc_choice\n";
@@ -5426,7 +5393,6 @@ class AppModel extends CI_Model
 			echo "dili ka update\n";
 			return false;
 		}
-
 	}
 
 	private function checkAddonsIfExist(
@@ -5438,19 +5404,18 @@ class AppModel extends CI_Model
 		$addon_uom_idd,
 		$addon_price,
 		$a_id,
-		$auom_id) 
-		
-	{
+		$auom_id
+	) {
 
 		// echo "addons_temp_id $addons_temp_id\n";
 		$c_addon = "";
 		$cc_addon = "";
-		$c_uom ="";
-		$cc_uom ="";
+		$c_uom = "";
+		$cc_uom = "";
 
-		$tempIdAddon ="";
-		$tempIdUom ="";
-		$tempIdAddons ="";
+		$tempIdAddon = "";
+		$tempIdUom = "";
+		$tempIdAddons = "";
 
 		$ifExist = false;
 		$ifSame = false;
@@ -5465,7 +5430,7 @@ class AppModel extends CI_Model
 
 		if (!empty($res)) {
 			$ifExist = true;
-		} 
+		}
 
 		$this->db->select('*, temp_order_id as temp_id, count(addon_id) as cc_addon');
 		$this->db->from('app_customer_temp_order_addons as temp_addons');
@@ -5483,8 +5448,8 @@ class AppModel extends CI_Model
 		$this->db->or_where('uom_id IS NULL', null, false);
 		$query2 = $this->db->get();
 		$res2 = $query2->result_array();
-		
-		foreach($res as $key => $addonValue) {
+
+		foreach ($res as $key => $addonValue) {
 
 			$a_price = (float) array_sum($addon_price);
 			$db_a_price = $res[$key]['addon_price'];
@@ -5498,7 +5463,7 @@ class AppModel extends CI_Model
 
 			if ($c_addon && $cc_addon == $a_id) {
 				$tempIdAddon = $res[$key]['temp_id'];
-				echo "tempIdAddon $tempIdAddon\n"; 
+				echo "tempIdAddon $tempIdAddon\n";
 			}
 
 			if ($cc_uom == $auom_id) {
@@ -5506,8 +5471,8 @@ class AppModel extends CI_Model
 				echo "tempIdUom $tempIdUom\n";
 			}
 
-			
-			if (!empty($tempIdAddon)){
+
+			if (!empty($tempIdAddon)) {
 				if ($tempIdAddon == $tempIdUom && $a_price == $db_a_price) {
 					$tempIdAddons = $res[$key]['temp_id'];
 					echo "tempIdAddons $tempIdAddons\n";
@@ -5520,14 +5485,13 @@ class AppModel extends CI_Model
 					$result = array('exist' => $ifExist, 'same' => $ifSame, 'temp_id' => null);
 					return $result;
 				}
-		
 			} else {
 				$ifSame = false;
 				// echo "way sides_temp_id\n";
 				$result = array('exist' => $ifExist, 'same' => $ifSame, 'temp_id' => null);
 				return $result;
 			}
-			
+
 
 			// echo "temp_id_addon_sides $temp_id_addon_sides\n";
 			// echo "c_addon $c_addon\n";
@@ -5537,9 +5501,7 @@ class AppModel extends CI_Model
 			// echo "a_price $a_price\n";
 			// echo "db_a_price $db_a_price\n";
 
-		} 
-		
-
+		}
 	}
 
 	// private function checkAddonsIfExist($userID, $prodId, $c, $u, $side_id, $cc_uom) 
@@ -5556,7 +5518,7 @@ class AppModel extends CI_Model
 	// 	$this->db->group_by('temp_addons.temp_order_id');
 	// 	$query = $this->db->get();
 	// 	$res = $query->result_array();
-		
+
 
 	// 	foreach($res as $key => $value) {
 	// 		// echo print_r($res);
@@ -5584,7 +5546,7 @@ class AppModel extends CI_Model
 	// 	echo "ang temp_id3 $temp_id3\n";
 	// }
 
-	private function checkIfSameCountAddons($temp_id, $all_addons_count) 
+	private function checkIfSameCountAddons($temp_id, $all_addons_count)
 	{
 
 		$s = array("null");
@@ -5592,29 +5554,29 @@ class AppModel extends CI_Model
 
 		$this->db->select('*');
 		$this->db->from('app_customer_temp_orders');
-		$this->db->where_in('id',$temp_id );
+		$this->db->where_in('id', $temp_id);
 		$query = $this->db->get();
 		$res = $query->result_array();
 
 		$this->db->select('*');
 		$this->db->from('app_customer_temp_order_suggestions');
-		$this->db->where_in('temp_order_id',$temp_id);
+		$this->db->where_in('temp_order_id', $temp_id);
 		$query1 = $this->db->get();
 		$res1 = $query1->result_array();
 
 		$this->db->select('*');
 		$this->db->from('app_customer_temp_order_choices');
-		$this->db->where_in('temp_order_id',$temp_id);
+		$this->db->where_in('temp_order_id', $temp_id);
 		$query2 = $this->db->get();
 		$res2 = $query2->result_array();
 
 		$this->db->select('*');
 		$this->db->from('app_customer_temp_order_addons');
-		$this->db->where_in('temp_order_id',$temp_id);
+		$this->db->where_in('temp_order_id', $temp_id);
 		$query3 = $this->db->get();
 		$res3 = $query3->result_array();
 
-		foreach($res as $key => $countValue) {
+		foreach ($res as $key => $countValue) {
 			$temp_id_suggestions = $res1[$key]['temp_order_id'];
 			$temp_id_choices = $res2[$key]['temp_order_id'];
 			$temp_id_addons = $res3[$key]['temp_order_id'];
@@ -5628,25 +5590,25 @@ class AppModel extends CI_Model
 				$temp_id = $res[$key]['id'];
 				return $temp_id;
 			}
-
 		}
 	}
 
 	public function addTempCartPickup_mod(
-		$userID, 
+		$userID,
 		$orderID,
-		$productID, 
-		$uomID, 
-		$quantity, 
-		$price, 
-		$measurement, 
-		$totalPrice, 
-		$icoos) {
-		
+		$productID,
+		$uomID,
+		$quantity,
+		$price,
+		$measurement,
+		$totalPrice,
+		$icoos
+	) {
+
 		$modeOfOrder = "1";
 		$this->db->trans_start();
 		$insert_id = $this->app_cart_today_order($userID, $modeOfOrder);
-		
+
 
 		$search1 = array("[", "]");
 		$replacewith1 = array("", "");
@@ -5679,7 +5641,7 @@ class AppModel extends CI_Model
 			$add_measurement = $measurent_array[$x];
 			$add_totPrice = $totalPrice_array[$x];
 			$add_icoos = $icoos_array[$x];
-			
+
 			$data = array(
 				'ticket_id'     => $insert_id,
 				'product_id'	=> $prod_id,
@@ -5692,33 +5654,33 @@ class AppModel extends CI_Model
 				'created_at'   	=> date('Y-m-d H:i:s'),
 				'updated_at'  	=> date('Y-m-d H:i:s'),
 			);
-	
+
 			$this->db->insert('toms_customer_temp_orders', $data);
 			$insert_idd = $this->db->insert_id();
 
 			$this->tempFlavors($order_id, $insert_idd);
 			$this->tempChoices($order_id, $insert_idd);
 			$this->tempAddons($order_id, $insert_idd);
-			
 		}
 		$this->db->trans_complete();
 	}
 
 	public function addTempCartDelivery_mod(
-		$userID, 
+		$userID,
 		$orderID,
-		$productID, 
-		$uomID, 
-		$quantity, 
-		$price, 
-		$measurement, 
-		$totalPrice, 
-		$icoos) {
-		
+		$productID,
+		$uomID,
+		$quantity,
+		$price,
+		$measurement,
+		$totalPrice,
+		$icoos
+	) {
+
 		$modeOfOrder = "0";
 		$this->db->trans_start();
 		$insert_id = $this->app_cart_today_order($userID, $modeOfOrder);
-		
+
 
 		$search1 = array("[", "]");
 		$replacewith1 = array("", "");
@@ -5751,7 +5713,7 @@ class AppModel extends CI_Model
 			$add_measurement = $measurent_array[$x];
 			$add_totPrice = $totalPrice_array[$x];
 			$add_icoos = $icoos_array[$x];
-			
+
 
 			$data = array(
 				'ticket_id'     => $insert_id,
@@ -5765,14 +5727,13 @@ class AppModel extends CI_Model
 				'created_at'   	=> date('Y-m-d H:i:s'),
 				'updated_at'  	=> date('Y-m-d H:i:s'),
 			);
-	
+
 			$this->db->insert('toms_customer_temp_orders', $data);
 			$insert_idd = $this->db->insert_id();
 
 			$this->tempFlavors($order_id, $insert_idd);
 			$this->tempChoices($order_id, $insert_idd);
 			$this->tempAddons($order_id, $insert_idd);
-
 		}
 		$this->db->trans_complete();
 	}
@@ -5908,7 +5869,7 @@ class AppModel extends CI_Model
 				'quantity' => $_counter,
 				'create_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s')
-			);	
+			);
 			$this->db->insert('app_cart_main', $datamain);
 			$insert_id = $this->db->insert_id();
 
@@ -6066,7 +6027,7 @@ class AppModel extends CI_Model
 				$total_price += (float) $hasAddons[0]->total_addons;
 			}
 
-			
+
 			$this->db->select("SUM(addon_price) as total_choices");
 			$this->db->from("app_customer_temp_order_choices");
 			$this->db->where("temp_order_id", $temp_order->id);
@@ -6119,7 +6080,7 @@ class AppModel extends CI_Model
 				$total_price += (float) $hasAddons[0]->total_addons;
 			}
 
-			
+
 			$this->db->select("SUM(addon_price) as total_choices");
 			$this->db->from("app_customer_temp_order_choices");
 			$this->db->where("temp_order_id", $temp_order->id);
@@ -6186,7 +6147,7 @@ class AppModel extends CI_Model
 
 	public function listenCartSubtotal_mod($cusid)
 	{
-	
+
 
 		$this->db->select('appcart.quantity as cart_qty,IFNULL(SUM(main_prod_price.price),0) + IFNULL(SUM(fd_fries_price.price),0) + IFNULL(SUM(fd_drink_price.price),0) + IFNULL(SUM(fd_side_price.price),0) + IFNULL(SUM(fd_flavors.addon_price),0) as total');
 		$this->db->from('app_cart_main as appcart');
@@ -6289,7 +6250,7 @@ class AppModel extends CI_Model
 		$replacewith1 = array("", "");
 		$productID 		  	= str_replace($search1, $replacewith1, $productID);
 		$productId  	= explode(',', $productID);
-		
+
 		// $productID = ['166','316','3016','195'];
 		$this->db->select('*,temp_orders.id as temp_order_id, users.id as userID');
 		$this->db->from('app_customer_temp_orders as temp_orders');
@@ -6299,7 +6260,7 @@ class AppModel extends CI_Model
 		$this->db->order_by('fd_prod.tenant_id', 'DESC');
 		$this->db->where('temp_orders.customerId', $customer_id);
 		// $this->db->where_in('temp_orders.id', $productId);
-		
+
 		$query = $this->db->get();
 
 		$main_orders = $query->result_array();
@@ -6321,7 +6282,7 @@ class AppModel extends CI_Model
 		$replacewith1 = array("", "");
 		$productID 		  	= str_replace($search1, $replacewith1, $productID);
 		$productId  	= explode(',', $productID);
-		
+
 		// $productID = ['166','316','3016','195'];
 		$this->db->select('*,temp_orders.id as temp_order_id, users.id as userID');
 		$this->db->from('app_customer_temp_orders as temp_orders');
@@ -6331,7 +6292,7 @@ class AppModel extends CI_Model
 		$this->db->order_by('fd_prod.tenant_id', 'DESC');
 		$this->db->where('temp_orders.customerId', $customer_id);
 		$this->db->where_in('temp_orders.id', $productId);
-		
+
 		$query = $this->db->get();
 
 		$main_orders = $query->result_array();
@@ -6417,26 +6378,26 @@ class AppModel extends CI_Model
 
 		$key = array_search((int) $main_order['tenant_id'], $tenant_array);
 
-			$date 		  = $date_array[$key];
-			$time		  = $time_array[$key];
-			$instructions = $instruction[$key];
+		$date 		  = $date_array[$key];
+		$time		  = $time_array[$key];
+		$instructions = $instruction[$key];
 
-			$s = array("'");
-			$r = array("");
-			$instruct = str_replace($s, $r, $instructions);
+		$s = array("'");
+		$r = array("");
+		$instruct = str_replace($s, $r, $instructions);
 
-			$order2 = array(
-				'ticket_id' 		=> $ticket_id,
-				'tenant_id' 		=> $main_order['tenant_id'],
-				'instructions'		=> $instruct,
-				'created_at' 		=> date('Y-m-d H:i:s'),
-				'updated_at' 		=> date('Y-m-d H:i:s'),
-			);
-	
-			$this->db->insert('customer_special_instructions', $order2);
-	
+		$order2 = array(
+			'ticket_id' 		=> $ticket_id,
+			'tenant_id' 		=> $main_order['tenant_id'],
+			'instructions'		=> $instruct,
+			'created_at' 		=> date('Y-m-d H:i:s'),
+			'updated_at' 		=> date('Y-m-d H:i:s'),
+		);
 
-			$dateTimePickup = date("Y-m-d H:i:s", strtotime("$date $time"));
+		$this->db->insert('customer_special_instructions', $order2);
+
+
+		$dateTimePickup = date("Y-m-d H:i:s", strtotime("$date $time"));
 
 		$order1 = array(
 			'ticket_id' 		=> $ticket_id,
@@ -6458,7 +6419,6 @@ class AppModel extends CI_Model
 		$this->db->insert('toms_customer_orders', $order1);
 
 		return $this->db->insert_id();
-
 	}
 
 	private function insertPickupOrders($ticket_id, $main_order, $customer_id, $deliveryDateData, $deliveryTimeData, $getTenantData, $specialInstruction, $modeOfOrder, $userID)
@@ -6521,7 +6481,6 @@ class AppModel extends CI_Model
 		$this->db->insert('toms_customer_orders', $order1);
 
 		return $this->db->insert_id();
-
 	}
 
 	private function insertChoices($temp_order_id, $order_id)
@@ -6549,17 +6508,17 @@ class AppModel extends CI_Model
 
 			foreach ($choices as $key => $choice) {
 
-				if($choice['choice_drinks'] == '0'){
+				if ($choice['choice_drinks'] == '0') {
 					$choice_drinks = null;
 				} else {
 					$choice_drinks = $choice['choice_drinks'];
 				}
-				if($choice['choice_fries'] == '0'){
+				if ($choice['choice_fries'] == '0') {
 					$choice_fries = null;
 				} else {
 					$choice_fries = $choice['choice_fries'];
 				}
-				if($choice['choice_sides'] == '0'){
+				if ($choice['choice_sides'] == '0') {
 					$choice_sides = null;
 				} else {
 					$choice_sides = $choice['choice_sides'];
@@ -6575,7 +6534,7 @@ class AppModel extends CI_Model
 					'uom_id' => $uom_id,
 					'choice_drinks' => $choice_drinks,
 					'choice_fries' => $choice_fries,
- 					'choice_sides' => $choice_sides,
+					'choice_sides' => $choice_sides,
 					'addon_price' => $choice['addon_price'],
 					'created_at' => date('Y-m-d H:i:s'),
 					'updated_at' => date('Y-m-d H:i:s')
@@ -6611,26 +6570,27 @@ class AppModel extends CI_Model
 			$addons = $query->result_array();
 
 			foreach ($addons as $key => $addon) {
-				if($addon['addon_sides'] == '0'){
+				if ($addon['addon_sides'] == '0') {
 					$addon_sides = null;
 				} else {
 					$addon_sides = $addon['addon_sides'];
 				}
-				if($addon['addon_dessert'] == '0'){
+				if ($addon['addon_dessert'] == '0') {
 					$addon_dessert = null;
 				} else {
 					$addon_dessert = $addon['addon_dessert'];
 				}
-				if($addon['addon_drinks'] == '0'){
+				if ($addon['addon_drinks'] == '0') {
 					$addon_drinks = null;
 				} else {
 					$addon_drinks = $addon['addon_drinks'];
 				}
-				if($addon['upgradable_item'] == '0'){
+				if ($addon['upgradable_item'] == '0') {
 					$upgradable_item = null;
 				} else {
 					$upgradable_item = $addon['upgradable_item'];
-				} if ($addon['uom_id'] == '0') {
+				}
+				if ($addon['uom_id'] == '0') {
 					$uom_id = null;
 				} else {
 					$uom_id = $addon['uom_id'];
@@ -6691,7 +6651,7 @@ class AppModel extends CI_Model
 				$suggestion_data = array(
 					'order_id' 				=> $order_id,
 					'suggestion_id' 		=> $suggestion['suggestion_id'],
-					'product_suggestion_id' =>$suggestion['product_suggestion_id'],
+					'product_suggestion_id' => $suggestion['product_suggestion_id'],
 					'addon_price' 			=> $suggestion['addon_price'],
 					'created_at' 			=> date('Y-m-d H:i:s'),
 					'updated_at' 			=> date('Y-m-d H:i:s')
@@ -6718,30 +6678,31 @@ class AppModel extends CI_Model
 
 
 	public function placeOrder_delivery_mod(
-		$cusId, 
-		$deliveryDate, 
-		$deliveryTime, 
-		$selectedDiscountType, 
-		$deliveryCharge, 
-		$amountTender, 
-		$specialInstruction, 
+		$cusId,
+		$deliveryDate,
+		$deliveryTime,
+		$selectedDiscountType,
+		$deliveryCharge,
+		$amountTender,
+		$specialInstruction,
 		$getTenantData,
-		$productID)
-	{
+		$productID
+	) {
 		$modeOfOrder = "0";
 		$this->db->trans_start();
 		$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
 		$totalPayablePrice = $this->loadSubTotalnew_mod($cusId, true) + $deliveryCharge;
 		$this->getMainOrders(
-			$cusId, 
-			$deliveryDate, 
-			$deliveryTime, 
-			$getTenantData, 
-			$specialInstruction, 
-			$modeOfOrder, 
-			$insert_id, 
-			$productID);
-		
+			$cusId,
+			$deliveryDate,
+			$deliveryTime,
+			$getTenantData,
+			$specialInstruction,
+			$modeOfOrder,
+			$insert_id,
+			$productID
+		);
+
 		// dd($totalPayablePrice);
 
 		$tenant_ids = $this->getTenantIDs($insert_id);
@@ -6839,30 +6800,31 @@ class AppModel extends CI_Model
 	}
 
 	public function placeOrder_delivery_mod2(
-		$cusId, 
-		$deliveryDate, 
-		$deliveryTime, 
-		$selectedDiscountType, 
-		$deliveryCharge, 
-		$amountTender, 
-		$specialInstruction, 
+		$cusId,
+		$deliveryDate,
+		$deliveryTime,
+		$selectedDiscountType,
+		$deliveryCharge,
+		$amountTender,
+		$specialInstruction,
 		$getTenantData,
-		$productID)
-	{
+		$productID
+	) {
 		$modeOfOrder = "0";
 		$this->db->trans_start();
 		$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
 		$totalPayablePrice = $this->loadSubTotalnew_mod2($cusId, $productID, true) + $deliveryCharge;
 		$this->getMainOrders2(
-			$cusId, 
-			$deliveryDate, 
-			$deliveryTime, 
-			$getTenantData, 
-			$specialInstruction, 
-			$modeOfOrder, 
-			$insert_id, 
-			$productID);
-		
+			$cusId,
+			$deliveryDate,
+			$deliveryTime,
+			$getTenantData,
+			$specialInstruction,
+			$modeOfOrder,
+			$insert_id,
+			$productID
+		);
+
 		// dd($totalPayablePrice);
 
 		$tenant_ids = $this->getTenantIDs($insert_id);
@@ -6960,81 +6922,82 @@ class AppModel extends CI_Model
 	}
 
 	public function placeOrder_pickup_mod(
-		$cusId, 
-		$deliveryDateData, 
-		$deliveryTimeData, 
-		$getTenantData, 
-		$specialInstruction, 
-		$subtotal, 
+		$cusId,
+		$deliveryDateData,
+		$deliveryTimeData,
+		$getTenantData,
+		$specialInstruction,
+		$subtotal,
 		$selectedDiscountType,
-		$productID)
-{
+		$productID
+	) {
 
-	$modeOfOrder = '1';
-	$this->db->trans_start();
-	$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
-	$totalPayablePrice = $this->loadSubTotalnew_mod($cusId, true);
-	$this->getPickupOrders(
-		$cusId, 
-		$deliveryDateData, 
-		$deliveryTimeData, 
-		$getTenantData, 
-		$specialInstruction, 
-		$modeOfOrder, 
-		$insert_id, 
-		$productID);
-	
-	// dd($totalPayablePrice);
-	
-	$tenant_ids = $this->getTenantIDs($insert_id);
-	// save delivery infos
-	$this->db->select('*');
-	$this->db->from('customer_addresses');
-	$this->db->where('shipping', '1');
-	$this->db->where('customer_id', $cusId);
-	$query = $this->db->get();
-	$res = $query->result_array();
-
-	foreach ($res as $value) {
-		$infos = array(
-			'ticket_id' => $insert_id,
-			'firstname' => $value['firstname'],
-			'lastname' => $value['lastname'],
-			'mobile_number' => $value['mobile_number'],
-			'barangay_id' => $value['barangay_id'],
-			'street_purok' => $value['street_purok'],
-			'complete_address' => $value['complete_address'],
-			'land_mark' => $value['land_mark'],
-			'created_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s')
+		$modeOfOrder = '1';
+		$this->db->trans_start();
+		$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
+		$totalPayablePrice = $this->loadSubTotalnew_mod($cusId, true);
+		$this->getPickupOrders(
+			$cusId,
+			$deliveryDateData,
+			$deliveryTimeData,
+			$getTenantData,
+			$specialInstruction,
+			$modeOfOrder,
+			$insert_id,
+			$productID
 		);
-		$this->db->insert('customer_delivery_infos', $infos);
-	}
 
-	$this->db->select('*');
-	$this->db->from('customer_addresses');
-	$this->db->where('shipping', '1');
-	$this->db->where('customer_id', $cusId);
-	$query = $this->db->get();
-	$res = $query->result_array();
+		// dd($totalPayablePrice);
 
-	foreach ($res as $value) {
-		$infos = array(
-			'ticket_id' => $insert_id,
-			'firstname' => $value['firstname'],
-			'lastname' => $value['lastname'],
-			'mobile_number' => $value['mobile_number'],
-			'barangay_id' => $value['barangay_id'],
-			'street_purok' => $value['street_purok'],
-			'complete_address' => $value['complete_address'],
-			'land_mark' => $value['land_mark'],
-			'created_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s')
-		);
-		$this->db->insert('customer_delivery_infos', $infos);
-	}
+		$tenant_ids = $this->getTenantIDs($insert_id);
+		// save delivery infos
+		$this->db->select('*');
+		$this->db->from('customer_addresses');
+		$this->db->where('shipping', '1');
+		$this->db->where('customer_id', $cusId);
+		$query = $this->db->get();
+		$res = $query->result_array();
 
-	$search1 = array("[", "]");
+		foreach ($res as $value) {
+			$infos = array(
+				'ticket_id' => $insert_id,
+				'firstname' => $value['firstname'],
+				'lastname' => $value['lastname'],
+				'mobile_number' => $value['mobile_number'],
+				'barangay_id' => $value['barangay_id'],
+				'street_purok' => $value['street_purok'],
+				'complete_address' => $value['complete_address'],
+				'land_mark' => $value['land_mark'],
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('customer_delivery_infos', $infos);
+		}
+
+		$this->db->select('*');
+		$this->db->from('customer_addresses');
+		$this->db->where('shipping', '1');
+		$this->db->where('customer_id', $cusId);
+		$query = $this->db->get();
+		$res = $query->result_array();
+
+		foreach ($res as $value) {
+			$infos = array(
+				'ticket_id' => $insert_id,
+				'firstname' => $value['firstname'],
+				'lastname' => $value['lastname'],
+				'mobile_number' => $value['mobile_number'],
+				'barangay_id' => $value['barangay_id'],
+				'street_purok' => $value['street_purok'],
+				'complete_address' => $value['complete_address'],
+				'land_mark' => $value['land_mark'],
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('customer_delivery_infos', $infos);
+		}
+
+		$search1 = array("[", "]");
 		$replacewith1 = array("", "");
 		$selectedDiscountType = str_replace($search1, $replacewith1, $selectedDiscountType);
 
@@ -7056,80 +7019,81 @@ class AppModel extends CI_Model
 			}
 		}
 
-	$customer_bills = array(
-		'ticket_id' => $insert_id,
-		'amount' => $totalPayablePrice,
-		'delivery_charge' => 0,
-		'change' => 0,
-		'created_at' => date('Y-m-d H:i:s'),
-		'updated_at' => date('Y-m-d H:i:s')
-	);
-
-	$this->db->insert('customer_bills', $customer_bills);
-
-	$this->db->where('customerId', $cusId);
-	$this->db->delete('app_cart_main');
-
-
-	$this->delete_on_checkout_mod($cusId);
-
-	$this->db->trans_complete();
-	}
-
-public function placeOrder_pickup_mod2(
-	$cusId, 
-	$deliveryDateData, 
-	$deliveryTimeData, 
-	$getTenantData, 
-	$specialInstruction, 
-	$subtotal, 
-	$selectedDiscountType,
-	$productID)
-{
-
-	$modeOfOrder = '1';
-	$this->db->trans_start();
-	$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
-	$totalPayablePrice = $this->loadSubTotalnew_mod2($cusId, $productID,true);
-	$this->getPickupOrders2(
-		$cusId, 
-		$deliveryDateData, 
-		$deliveryTimeData, 
-		$getTenantData, 
-		$specialInstruction, 
-		$modeOfOrder, 
-		$insert_id, 
-		$productID);
-	
-	// dd($totalPayablePrice);
-	
-	$tenant_ids = $this->getTenantIDs($insert_id);
-	// save delivery infos
-	$this->db->select('*');
-	$this->db->from('customer_addresses');
-	$this->db->where('shipping', '1');
-	$this->db->where('customer_id', $cusId);
-	$query = $this->db->get();
-	$res = $query->result_array();
-
-	foreach ($res as $value) {
-		$infos = array(
+		$customer_bills = array(
 			'ticket_id' => $insert_id,
-			'firstname' => $value['firstname'],
-			'lastname' => $value['lastname'],
-			'mobile_number' => $value['mobile_number'],
-			'barangay_id' => $value['barangay_id'],
-			'street_purok' => $value['street_purok'],
-			'complete_address' => $value['complete_address'],
-			'land_mark' => $value['land_mark'],
+			'amount' => $totalPayablePrice,
+			'delivery_charge' => 0,
+			'change' => 0,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		);
-		$this->db->insert('customer_delivery_infos', $infos);
-		// $this->db->insert('customer_billing_infos', $infos);
+
+		$this->db->insert('customer_bills', $customer_bills);
+
+		$this->db->where('customerId', $cusId);
+		$this->db->delete('app_cart_main');
+
+
+		$this->delete_on_checkout_mod($cusId);
+
+		$this->db->trans_complete();
 	}
 
-	$search1 = array("[", "]");
+	public function placeOrder_pickup_mod2(
+		$cusId,
+		$deliveryDateData,
+		$deliveryTimeData,
+		$getTenantData,
+		$specialInstruction,
+		$subtotal,
+		$selectedDiscountType,
+		$productID
+	) {
+
+		$modeOfOrder = '1';
+		$this->db->trans_start();
+		$insert_id = $this->app_cart_today_order($cusId, $modeOfOrder);
+		$totalPayablePrice = $this->loadSubTotalnew_mod2($cusId, $productID, true);
+		$this->getPickupOrders2(
+			$cusId,
+			$deliveryDateData,
+			$deliveryTimeData,
+			$getTenantData,
+			$specialInstruction,
+			$modeOfOrder,
+			$insert_id,
+			$productID
+		);
+
+		// dd($totalPayablePrice);
+
+		$tenant_ids = $this->getTenantIDs($insert_id);
+		// save delivery infos
+		$this->db->select('*');
+		$this->db->from('customer_addresses');
+		$this->db->where('shipping', '1');
+		$this->db->where('customer_id', $cusId);
+		$query = $this->db->get();
+		$res = $query->result_array();
+
+		foreach ($res as $value) {
+			$infos = array(
+				'ticket_id' => $insert_id,
+				'firstname' => $value['firstname'],
+				'lastname' => $value['lastname'],
+				'mobile_number' => $value['mobile_number'],
+				'barangay_id' => $value['barangay_id'],
+				'street_purok' => $value['street_purok'],
+				'complete_address' => $value['complete_address'],
+				'land_mark' => $value['land_mark'],
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('customer_delivery_infos', $infos);
+			// $this->db->insert('customer_billing_infos', $infos);
+		}
+
+		$search1 = array("[", "]");
 		$replacewith1 = array("", "");
 		$selectedDiscountType = str_replace($search1, $replacewith1, $selectedDiscountType);
 
@@ -7151,24 +7115,24 @@ public function placeOrder_pickup_mod2(
 			}
 		}
 
-	$customer_bills = array(
-		'ticket_id' => $insert_id,
-		'amount' => $totalPayablePrice,
-		'delivery_charge' => 0,
-		'change' => 0,
-		'created_at' => date('Y-m-d H:i:s'),
-		'updated_at' => date('Y-m-d H:i:s')
-	);
+		$customer_bills = array(
+			'ticket_id' => $insert_id,
+			'amount' => $totalPayablePrice,
+			'delivery_charge' => 0,
+			'change' => 0,
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')
+		);
 
-	$this->db->insert('customer_bills', $customer_bills);
+		$this->db->insert('customer_bills', $customer_bills);
 
-	$this->db->where('customerId', $cusId);
-	$this->db->delete('app_cart_main');
-	$this->delete_on_checkout_mod($cusId);
+		$this->db->where('customerId', $cusId);
+		$this->db->delete('app_cart_main');
+		$this->delete_on_checkout_mod($cusId);
 
-	$this->db->trans_complete();
+		$this->db->trans_complete();
 	}
-	
+
 	public function savePickup_mod($customerId, $groupValue, $deliveryDateData, $deliveryTimeData, $getTenantData, $subtotal, $tender)
 	{
 		// $jsonStr = json_decode($deliveryDateData,true);
@@ -7393,7 +7357,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->limit(1);
 		$this->db->where('appcart.customer_id', $customerId);
 		// $this->db->where('appcart.type', '2');
-		$this->db->order_by('id','desc');
+		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result_array();
 
@@ -7403,7 +7367,7 @@ public function placeOrder_pickup_mod2(
 		$date = date_format($now, 'ymd');
 
 		if (empty($result)) {
-				
+
 			$data = array(
 				'ticket' => date('ymd') . '-2-00' . $count,
 				'customer_id' => $customerId,
@@ -7418,18 +7382,18 @@ public function placeOrder_pickup_mod2(
 			return $this->db->insert_id();
 		}
 
-		foreach($result as $value) {
+		foreach ($result as $value) {
 			$prev = $value['prevDate'];
 
-			if ($today == $prev){
+			if ($today == $prev) {
 				$result = $query->row();
 				$grmNumber = $result->ticket;
-				$suffix = substr($grmNumber,-3);
+				$suffix = substr($grmNumber, -3);
 				$newsuffix = intval($suffix) + 1;
 				$count = str_pad($newsuffix, 3, '0', STR_PAD_LEFT);
-				
+
 				$data = array(
-				
+
 					'ticket' => date('ymd') . '-2-' . $count,
 					'customer_id' => $customerId,
 					'type' => '2',
@@ -7442,9 +7406,9 @@ public function placeOrder_pickup_mod2(
 				$this->db->insert('tickets', $data);
 				return $this->db->insert_id();
 			}
-	
+
 			$data = array(
-				
+
 				'ticket' => date('ymd') . '-2-00' . $count,
 				'customer_id' => $customerId,
 				'type' => '2',
@@ -7457,9 +7421,6 @@ public function placeOrder_pickup_mod2(
 			$this->db->insert('tickets', $data);
 			return $this->db->insert_id();
 		}
-
-		
-			
 	}
 
 	public function loadSubTotal_mod($cusId)
@@ -7831,7 +7792,6 @@ public function placeOrder_pickup_mod2(
 			$this->db->where('id', $ticketID);
 			$this->db->update('tickets');
 		}
-		
 	}
 
 	public function cancelOrderGoods_mod($buId, $ticketID)
@@ -7916,7 +7876,7 @@ public function placeOrder_pickup_mod2(
 			// 			$query = $this->db->get();
 			// 			$res = $query->num_rows();	
 
-						$this->pusher()->trigger("private-grocery-order-submitted", 'App\Events\GroceryOrderSubmitted', array('message' => ''));
+			$this->pusher()->trigger("private-grocery-order-submitted", 'App\Events\GroceryOrderSubmitted', array('message' => ''));
 		}
 	}
 
@@ -8098,7 +8058,7 @@ public function placeOrder_pickup_mod2(
 		echo json_encode($item);
 	}
 
-	public function getDiscount_mod($ticketID) 
+	public function getDiscount_mod($ticketID)
 	{
 		$this->db->select('*, sum(discounts.discount) as total_discount');
 		$this->db->from('customer_discounted_amounts as discounts');
@@ -8118,7 +8078,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getTotal_mod($ticket)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,SUM(IF(toms_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as ticket');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = ticket.id');
@@ -8144,12 +8104,11 @@ public function placeOrder_pickup_mod2(
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
-
 	}
 
 	public function getTotal_mod2($ticket)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,SUM(IF(toms_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as ticket');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = ticket.id');
@@ -8168,7 +8127,7 @@ public function placeOrder_pickup_mod2(
 				'amount_tender'	  => $value['amount'],
 				'change'		  => $value['change'],
 				'cancel_status'   => $value['cancel_status'],
-		
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -8177,7 +8136,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getTotalGoods_mod($ticket)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,SUM(IF(gc_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as ticket');
 		$this->db->join('gc_final_order as gc_order', 'gc_order.ticket_id = ticket.id');
@@ -8200,12 +8159,11 @@ public function placeOrder_pickup_mod2(
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
-
 	}
 
 	public function getPickupScheduleFoods_mod($ticket)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, SUM(IF(toms_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as tickets');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
@@ -8238,7 +8196,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getPickupScheduleGoods_mod($ticket)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, SUM(IF(gc_order.canceled_status = 0, total_price, 0)) total_price');
 		$this->db->from('tickets as tickets');
 		$this->db->join('gc_final_order as gc_order', 'gc_order.ticket_id = tickets.id', 'inner');
@@ -8272,7 +8230,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->from('tickets as tickets');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
 		$this->db->join('fd_products as fd_prod', 'fd_prod.product_id = toms_order.product_id');
-		$this->db->join('locate_tenants as loc_tenants', 'loc_tenants.tenant_id = fd_prod.tenant_id','inner');
+		$this->db->join('locate_tenants as loc_tenants', 'loc_tenants.tenant_id = fd_prod.tenant_id', 'inner');
 		$this->db->join('toms_tag_riders as tag_riders', 'tag_riders.tenant_id = loc_tenants.tenant_id AND tag_riders.ticket_id = toms_order.ticket_id', 'inner');
 		$this->db->join('partial_tag_riders as partial_riders', 'partial_riders.ticket_id = toms_order.ticket_id');
 		$this->db->join('toms_riders_data as riders_data', 'riders_data.id = partial_riders.rider_id', 'inner');
@@ -8288,32 +8246,31 @@ public function placeOrder_pickup_mod2(
 
 		if (count($res) == 0) {
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
-		$this->db->select('*');
-		$this->db->from('tickets as tickets');
-		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
-		$this->db->join('fd_products as fd_prod', 'fd_prod.product_id = toms_order.product_id');
-		$this->db->join('locate_tenants as loc_tenants', 'loc_tenants.tenant_id = fd_prod.tenant_id');
-		$this->db->join('fd_vtype_suggestions as vtype', 'vtype.tenant_id = loc_tenants.tenant_id AND vtype.ticket_id = toms_order.ticket_id');
-		$this->db->join('vehicle_types as vtypes', 'vtypes.id = vtype.transpo_id');
-		$this->db->where('toms_order.ticket_id', $ticketId);
-		// $this->db->where('tickets.cancel_status', '0');
-		$this->db->group_by('vtype.ticket_id');
-		$query = $this->db->get();
-		$res = $query->result_array();
+			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+			$this->db->select('*');
+			$this->db->from('tickets as tickets');
+			$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
+			$this->db->join('fd_products as fd_prod', 'fd_prod.product_id = toms_order.product_id');
+			$this->db->join('locate_tenants as loc_tenants', 'loc_tenants.tenant_id = fd_prod.tenant_id');
+			$this->db->join('fd_vtype_suggestions as vtype', 'vtype.tenant_id = loc_tenants.tenant_id AND vtype.ticket_id = toms_order.ticket_id');
+			$this->db->join('vehicle_types as vtypes', 'vtypes.id = vtype.transpo_id');
+			$this->db->where('toms_order.ticket_id', $ticketId);
+			// $this->db->where('tickets.cancel_status', '0');
+			$this->db->group_by('vtype.ticket_id');
+			$query = $this->db->get();
+			$res = $query->result_array();
 
-		$post_data = array();
-		foreach ($res as $value) {
-			$post_data[] = array(
-				'vehicle_type'   => $value['vehicle_type'],
-				'riders_fee'     => $value['delivery_charge'],
-			);
-		}
-		$item = array('user_details' => $post_data);
-		echo json_encode($item);
-
+			$post_data = array();
+			foreach ($res as $value) {
+				$post_data[] = array(
+					'vehicle_type'   => $value['vehicle_type'],
+					'riders_fee'     => $value['delivery_charge'],
+				);
+			}
+			$item = array('user_details' => $post_data);
+			echo json_encode($item);
 		} else {
-			
+
 			$post_data = array();
 			foreach ($res as $value) {
 				$post_data[] = array(
@@ -8324,14 +8281,11 @@ public function placeOrder_pickup_mod2(
 			$item = array('user_details' => $post_data);
 			echo json_encode($item);
 		}
-
-
-		
 	}
 
 	public function getInstruction_mod($ticket_id)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('customer_special_instructions as instruction');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = instruction.ticket_id');
@@ -8342,20 +8296,19 @@ public function placeOrder_pickup_mod2(
 		$res = $query->result_array();
 
 		$post_data = array();
-			foreach ($res as $value) {
-				$post_data[] = array(
-					'tenant_id'		 => $value['tenant_id'],
-					'instructions' 	 => $value['instructions'],	
-				);
-			}
-			$item = array('user_details' => $post_data);
-			echo json_encode($item);
-
+		foreach ($res as $value) {
+			$post_data[] = array(
+				'tenant_id'		 => $value['tenant_id'],
+				'instructions' 	 => $value['instructions'],
+			);
+		}
+		$item = array('user_details' => $post_data);
+		echo json_encode($item);
 	}
 
 	public function getOrderSummary_mod($ticket_id)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('tickets as tickets');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = tickets.id', 'inner');
@@ -8392,7 +8345,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getPickupSummaryFoods_mod($ticket_id)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('tickets as ticket');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = ticket.id');
@@ -8429,7 +8382,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getPickupSummaryGoods_mod($ticket_id)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*, order_status.created_at as submitted_at');
 		$this->db->from('tickets as ticket');
 		$this->db->join('gc_order_statuses as order_status', 'order_status.ticket_id = ticket.id');
@@ -8465,7 +8418,7 @@ public function placeOrder_pickup_mod2(
 		echo json_encode($item);
 	}
 
-	public function getPickupTime_mod() 
+	public function getPickupTime_mod()
 	{
 		$this->db->select('*');
 		$this->db->from('gc_setup_business_rules');
@@ -8480,18 +8433,17 @@ public function placeOrder_pickup_mod2(
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
-
 	}
 
 	public function subTotal_mod($ticket_id)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(toms_order.total_price) as total_price');
 		$this->db->from('tickets as ticket');
 		$this->db->join('toms_customer_orders as toms_order', 'toms_order.ticket_id = ticket.id');
 		$this->db->join('customer_bills as cust_bill', 'cust_bill.ticket_id = ticket.id');
 		$this->db->where('ticket.ticket', $ticket_id);
-		$this->db->where('toms_order.canceled_status','0');
+		$this->db->where('toms_order.canceled_status', '0');
 		$query = $this->db->get();
 		$res = $query->result_array();
 
@@ -8661,7 +8613,7 @@ public function placeOrder_pickup_mod2(
 
 	public function searchGc_item_mod($query, $unitGroupId, $bunitCode, $groupCode)
 	{
-	
+
 		$this->db->select('*, gc_prod.product_id as prod_id');
 		$this->db->from('gc_product_items as gc_prod');
 		$this->db->join('gc_product_prices as gc_price', 'gc_price.itemcode =  gc_prod.itemcode', 'inner');
@@ -8672,10 +8624,10 @@ public function placeOrder_pickup_mod2(
 		$this->db->group_by('gc_prod.itemcode');
 		// $this->db->join('gc_item_log_availables as gc_available','gc_available.itemcode = gc_prod.itemcode', 'left');
 		// $this->db->like('gc_prod.product_name', $query);
-		
+
 		// $this->db->where('NOT EXISTS (select 1 from gc_item_log_availables where gc_item_log_availables.itemcode = gc_prod.itemcode and store = 1)');
 		// ->offset($offset);
-		
+
 
 		$products = $this->db->where('gc_prod.status', 'active')
 			// ->where('image !=', 'null')
@@ -8705,7 +8657,7 @@ public function placeOrder_pickup_mod2(
 			->limit(10)
 			->offset($offset)
 			->group_by('gc_prod.itemcode');
-			
+
 		// if (!empty($itemSearch)) {
 		// 	$this->db->like('gc_prod.product_name', $itemSearch);
 		// }
@@ -8721,7 +8673,7 @@ public function placeOrder_pickup_mod2(
 			$with = $this->productLeastUOMPrice($product);
 
 			if (!empty($with)) {
-				
+
 				$product->prod_id = $product->product_id;
 				$product->image = $this->gcproductImage . $product->image;
 				$product->uom = $with->UOM;
@@ -8735,7 +8687,7 @@ public function placeOrder_pickup_mod2(
 		echo json_encode(compact('user_details'));
 	}
 
-	private function productLeastUOMPrice(object $product) : object
+	private function productLeastUOMPrice(object $product): object
 	{
 		$uomPrice = $this->db->select('*')
 			->from('gc_product_prices as price')
@@ -8767,7 +8719,7 @@ public function placeOrder_pickup_mod2(
 		}
 	}
 
-	public function gc_loadPriceGroup_mod($cusId) 
+	public function gc_loadPriceGroup_mod($cusId)
 	{
 		$this->db->select('*');
 		$this->db->from('app_cart_gc as cart_gc');
@@ -8788,7 +8740,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getStore_mod($cusId)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(gc_prod_price.price_with_vat * cart_gc.quantity) as sumperstore, cart_gc.quantity as cartQty, count(*) as num');
 		$this->db->from('app_cart_gc as cart_gc');
 		$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = cart_gc.item_code AND gc_prod_price.UOM = cart_gc.uom_symbol');
@@ -8820,7 +8772,7 @@ public function placeOrder_pickup_mod2(
 		$tempID 	  = str_replace($search1, $replacewith1, $tempID);
 		$tempId  	  = explode(',', $tempID);
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,sum(gc_prod_price.price_with_vat * cart_gc.quantity) as sumperstore, cart_gc.quantity as cartQty, count(*) as num');
 		$this->db->from('app_cart_gc as cart_gc');
 		$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = cart_gc.item_code AND gc_prod_price.UOM = cart_gc.uom_symbol');
@@ -8874,7 +8826,7 @@ public function placeOrder_pickup_mod2(
 				'buCode'  => $value['bunit_code'],
 				'price_price' => $value['price_with_vat'],
 				'total_price' => number_format($value['price_with_vat'] * $value['cartQty'], 2),
-			
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -8888,7 +8840,7 @@ public function placeOrder_pickup_mod2(
 		$replacewith1 = array("", "");
 		$tempID 	  = str_replace($search1, $replacewith1, $tempID);
 		$tempId  	  = explode(',', $tempID);
-		
+
 		$this->db->select('*,cart_gc.item_code as itemCode , cart_gc.quantity as cartQty');
 		$this->db->from('app_cart_gc as cart_gc');
 		$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = cart_gc.item_code AND gc_prod_price.UOM = cart_gc.uom_symbol');
@@ -8916,7 +8868,7 @@ public function placeOrder_pickup_mod2(
 				'price_price' 	=> $value['price_with_vat'],
 				'total_price' 	=> number_format($value['price_with_vat'] * $value['cartQty'], 2),
 				'icoos'			=> $value['icoos']
-			
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -8927,9 +8879,9 @@ public function placeOrder_pickup_mod2(
 	{
 		$this->db->select('*');
 		$this->db->from('app_cart_gc as appCart');
-		$this->db->where('appCart.customer_id',$userID);
+		$this->db->where('appCart.customer_id', $userID);
 		$this->db->where('appCart.item_code', $itemCode);
-		$this->db->where('appCart.uom_symbol',$uomSymbol);
+		$this->db->where('appCart.uom_symbol', $uomSymbol);
 		$query = $this->db->get();
 		$res = $query->result_array();
 
@@ -8948,14 +8900,14 @@ public function placeOrder_pickup_mod2(
 			);
 			$this->db->insert('app_cart_gc', $data);
 		} else {
-			foreach($res as $value) {
-			$quantity = $value['quantity'];
+			foreach ($res as $value) {
+				$quantity = $value['quantity'];
 
-			$this->db->set('quantity', $_counter + $quantity);
-			$this->db->where('customer_id',$userID);
-			$this->db->where('item_code', $itemCode);
-			$this->db->where('uom_symbol',$uomSymbol);
-			$this->db->update('app_cart_gc');
+				$this->db->set('quantity', $_counter + $quantity);
+				$this->db->where('customer_id', $userID);
+				$this->db->where('item_code', $itemCode);
+				$this->db->where('uom_symbol', $uomSymbol);
+				$this->db->update('app_cart_gc');
 			}
 		}
 	}
@@ -9018,7 +8970,7 @@ public function placeOrder_pickup_mod2(
 
 	public function getGcCounter_mod($cusid)
 	{
-		
+
 		$this->db->select('*');
 		$this->db->from('app_cart_gc as appgccart');
 		$this->db->where('appgccart.customer_id', $cusid);
@@ -9079,7 +9031,7 @@ public function placeOrder_pickup_mod2(
 
 		if (count($res) == 0) {
 			// echo "way uom";
-		
+
 			$this->db->select('*,min(price_with_vat) as minprice, gc_cate.itemcode as itemcode');
 			$this->db->from('gc_product_items as gc_cate');
 			$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = gc_cate.itemcode');
@@ -9093,7 +9045,7 @@ public function placeOrder_pickup_mod2(
 			// $this->db->order_by('gc_cate.product_name', 'ASC');
 			$query = $this->db->get();
 			$res = $query->result_array();
-	
+
 			$post_data = array();
 			foreach ($res as $value) {
 				$post_data[] = array(
@@ -9109,9 +9061,8 @@ public function placeOrder_pickup_mod2(
 			}
 			$item = array('user_details' => $post_data);
 			echo json_encode($item);
-
 		} else {
-		
+
 			$post_data = array();
 			foreach ($res as $value) {
 				$post_data[] = array(
@@ -9225,7 +9176,7 @@ public function placeOrder_pickup_mod2(
 				'buId' => $value['buId'],
 				'buName' => $value['business_unit'],
 				'total' => number_format($value['gcsum'], 2),
-		
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -9250,7 +9201,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->group_by('cart_gc.buId');
 		$query = $this->db->get();
 		$res = $query->result_array();
-		
+
 		$post_data = array();
 		foreach ($res as $value) {
 			$post_data[] = array(
@@ -9302,17 +9253,18 @@ public function placeOrder_pickup_mod2(
 		echo json_encode($item);
 	}
 
-	public function gc_submitOrder_mod($customerId, 
-	$groupValue, 
-	$deliveryDateData, 
-	$deliveryTimeData, 
-	$buData, 
-	$totalData, 
-	$convenienceData, 
-	$placeRemarks, 
-	$pickUpOrDelivery,
-	$priceGroup)
-	{
+	public function gc_submitOrder_mod(
+		$customerId,
+		$groupValue,
+		$deliveryDateData,
+		$deliveryTimeData,
+		$buData,
+		$totalData,
+		$convenienceData,
+		$placeRemarks,
+		$pickUpOrDelivery,
+		$priceGroup
+	) {
 		$this->db->trans_start();
 		// dd($customerId, $groupValue, $deliveryDateData, $deliveryTimeData, $buData, $totalData, $convenienceData, $placeRemarks);
 		$deliveryDateData_arr = str_replace(array("[", "]"), array("", ""), $deliveryDateData);
@@ -9358,7 +9310,7 @@ public function placeOrder_pickup_mod2(
 			$query2 = $this->db->get();
 			$res2 = $query2->result_array();
 
-			
+
 			foreach ($res2 as $value) {
 				$data = array(
 					'ticket_id' => $insert_id,
@@ -9383,16 +9335,16 @@ public function placeOrder_pickup_mod2(
 				$dat = [
 					'ticket_id' => $insert_id,
 					'bu_id' => $buId,
-					'mode_of_order' => 1,
+					'mode_of_order' => 0,
 					'order_pickup' => date('Y-m-d H:i:s', strtotime("$date $time")),
 					'user_id' => $value['userID'],
 					'created_at' => date('Y-m-d H:i:s'),
 					'updated_at' => date('Y-m-d H:i:s')
 				];
-	
+
 				$this->db->insert('gc_order_statuses', $dat);
 			}
-			
+
 			$dat1 = [
 				'ticket_id' => $insert_id,
 				'bu_id' => $buId,
@@ -9412,55 +9364,53 @@ public function placeOrder_pickup_mod2(
 				'updated_at' => date('Y-m-d H:i:s')
 			];
 			$this->db->insert('customer_bills', $dat2);
-
 		}
 
-			$this->db->select('*');
-			$this->db->from('customer_addresses');
-			$this->db->where('shipping', '1');
-			$this->db->where('customer_id', $customerId);
-			$query = $this->db->get();
-			$res = $query->result_array();
-			// $post_data = array();
-			foreach ($res as $value) {
-				$infos = array(
-					'ticket_id' => $insert_id,
-					'firstname' => $value['firstname'],
-					'lastname' => $value['lastname'],
-					'mobile_number' => $value['mobile_number'],
-					'barangay_id' => $value['barangay_id'],
-					'street_purok' => $value['street_purok'],
-					'complete_address' => $value['complete_address'],
-					'land_mark' => $value['land_mark'],
-					'created_at' => date('Y-m-d H:i:s'),
-					'updated_at' => date('Y-m-d H:i:s')
-				);
-				$this->db->insert('customer_delivery_infos', $infos);
-			
-			}
+		$this->db->select('*');
+		$this->db->from('customer_addresses');
+		$this->db->where('shipping', '1');
+		$this->db->where('customer_id', $customerId);
+		$query = $this->db->get();
+		$res = $query->result_array();
+		// $post_data = array();
+		foreach ($res as $value) {
+			$infos = array(
+				'ticket_id' => $insert_id,
+				'firstname' => $value['firstname'],
+				'lastname' => $value['lastname'],
+				'mobile_number' => $value['mobile_number'],
+				'barangay_id' => $value['barangay_id'],
+				'street_purok' => $value['street_purok'],
+				'complete_address' => $value['complete_address'],
+				'land_mark' => $value['land_mark'],
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('customer_delivery_infos', $infos);
+		}
 
-			// $this->db->select('*');
-			// $this->db->from('customer_addresses');
-			// $this->db->where('shipping', '1');
-			// $this->db->where('customer_id', $customerId);
-			// $query = $this->db->get();
-			// $res = $query->result_array();
-			// // $post_data = array();
-			// foreach ($res as $value) {
-			// 	$infos = array(
-			// 		'ticket_id' => $insert_id,
-			// 		'firstname' => $value['firstname'],
-			// 		'lastname' => $value['lastname'],
-			// 		'mobile_number' => $value['mobile_number'],
-			// 		'barangay_id' => $value['barangay_id'],
-			// 		'street_purok' => $value['street_purok'],
-			// 		'complete_address' => $value['complete_address'],
-			// 		'land_mark' => $value['land_mark'],
-			// 		'created_at' => date('Y-m-d H:i:s'),
-			// 		'updated_at' => date('Y-m-d H:i:s')
-			// 	);
-			// 	$this->db->insert('customer_delivery_infos', $infos);
-			// }
+		// $this->db->select('*');
+		// $this->db->from('customer_addresses');
+		// $this->db->where('shipping', '1');
+		// $this->db->where('customer_id', $customerId);
+		// $query = $this->db->get();
+		// $res = $query->result_array();
+		// // $post_data = array();
+		// foreach ($res as $value) {
+		// 	$infos = array(
+		// 		'ticket_id' => $insert_id,
+		// 		'firstname' => $value['firstname'],
+		// 		'lastname' => $value['lastname'],
+		// 		'mobile_number' => $value['mobile_number'],
+		// 		'barangay_id' => $value['barangay_id'],
+		// 		'street_purok' => $value['street_purok'],
+		// 		'complete_address' => $value['complete_address'],
+		// 		'land_mark' => $value['land_mark'],
+		// 		'created_at' => date('Y-m-d H:i:s'),
+		// 		'updated_at' => date('Y-m-d H:i:s')
+		// 	);
+		// 	$this->db->insert('customer_delivery_infos', $infos);
+		// }
 
 		$this->db->where('customer_id', $customerId);
 		$this->db->delete('app_cart_gc');
@@ -9468,20 +9418,20 @@ public function placeOrder_pickup_mod2(
 		$this->db->trans_complete();
 	}
 
-	public function gc_submitOrderPickup_mod($customerId, 
-	$groupValue, 
-	$deliveryDateData, 
-	$deliveryTimeData, 
-	$buData, 
-	$totalAmount, 
-	$pickingCharge, 
-	$placeRemarks, 
-	$pickUpOrDelivery,
-	$priceGroup,
-	$tempID)
-	{
-		
-		
+	public function gc_submitOrderPickup_mod(
+		$customerId,
+		$groupValue,
+		$deliveryDateData,
+		$deliveryTimeData,
+		$buData,
+		$totalAmount,
+		$pickingCharge,
+		$placeRemarks,
+		$pickUpOrDelivery,
+		$priceGroup,
+		$tempID
+	) {
+
 		// dd($customerId, $groupValue, $deliveryDateData, $deliveryTimeData, $buData, $totalData, $convenienceData, $placeRemarks);
 		$deliveryDateData_arr = str_replace(array("[", "]"), array("", ""), $deliveryDateData);
 		$dates  = explode(',', $deliveryDateData_arr);
@@ -9502,72 +9452,62 @@ public function placeOrder_pickup_mod2(
 
 		$insert_id = $this->app_cart_today_order($customerId, $pickUpOrDelivery);
 
-		$userID ="";
+		$userID = "";
+		$this->db->select('*,cart_gc.product_id as gcarProdId  , cart_gc.quantity as cartQty, users.id as userID');
+		$this->db->from('app_cart_gc as cart_gc');
+		$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = cart_gc.item_code AND gc_prod_price.UOM = cart_gc.uom_symbol');
+		$this->db->join('gc_product_items as gc_prod_items', 'gc_prod_items.itemcode = cart_gc.item_code');
+		$this->db->join('locate_business_units as loc_bu', 'loc_bu.bunit_code = cart_gc.buId AND loc_bu.price_group_code = gc_prod_price.price_group');
+		$this->db->join('app_users as users', 'users.customer_id = cart_gc.customer_id');
+		$this->db->where('cart_gc.customer_id', $customerId);
+		$this->db->where_in('cart_gc.id', $tempId);
+		// $this->db->where('cart_gc.buId', $buId);
+		// $this->db->where('gc_prod_price.price_group', $priceGroup);
+		$query2 = $this->db->get();
+		$res2 = $query2->result_array();
+		foreach ($res2 as $value) {
+			$userID = $value['userID'];
+			$data = array(
+				'ticket_id' 		=> $insert_id,
+				'bu_id' 			=> $value['buId'],
+				'product_id' 		=> $value['gcarProdId'],
+				'uom_id' 			=> $value['uom'],
+				'quantity' 			=> $value['cartQty'],
+				'price' 			=> $value['price_with_vat'],
+				'total_price' 		=> $value['price_with_vat'] * $value['cartQty'],
+				'icoos' 			=> $value['icoos'],
+				'pending_status' 	=> '1',
+				'user_id' 			=> $value['userID'],
+				'created_at' 		=> date('Y-m-d H:i:s'),
+				'updated_at' 		=> date('Y-m-d H:i:s')
+			);
+			$this->db->insert('gc_final_order', $data);
+			$this->pusher()->trigger("private-grocery-order-submitted.{$buId}", 'App\Events\GroceryOrderSubmitted', array('message' => ''));
+		}
 
+		foreach ($stores as $key => $buId) {
 
-			$this->db->select('*,cart_gc.product_id as gcarProdId  , cart_gc.quantity as cartQty, users.id as userID');
-			$this->db->from('app_cart_gc as cart_gc');
-			$this->db->join('gc_product_prices as gc_prod_price', 'gc_prod_price.itemcode = cart_gc.item_code AND gc_prod_price.UOM = cart_gc.uom_symbol');
-			$this->db->join('gc_product_items as gc_prod_items', 'gc_prod_items.itemcode = cart_gc.item_code');
-			$this->db->join('locate_business_units as loc_bu', 'loc_bu.bunit_code = cart_gc.buId AND loc_bu.price_group_code = gc_prod_price.price_group');
-			$this->db->join('app_users as users', 'users.customer_id = cart_gc.customer_id');
-			$this->db->where('cart_gc.customer_id', $customerId);
-			$this->db->where_in('cart_gc.id', $tempId);
-			// $this->db->where('cart_gc.buId', $buId);
-			// $this->db->where('gc_prod_price.price_group', $priceGroup);
+			$date 					= $dates[$key];
+			$time 					= $times[$key];
+			$placeRemark 			= $placeRemarks[$key];
 
-			$query2 = $this->db->get();
-			$res2 = $query2->result_array();
+			$dat = [
+				'ticket_id' 	=> $insert_id,
+				'bu_id' 		=> $buId,
+				'mode_of_order' => 1,
+				'order_pickup' 	=> date('Y-m-d H:i:s', strtotime("$date $time")),
+				'user_id' 		=> $userID,
+				'submitted_at' 	=> date('Y-m-d H:i:s'),
+				'created_at' 	=> date('Y-m-d H:i:s'),
+				'updated_at' 	=> date('Y-m-d H:i:s')
 
-			
-			foreach ($res2 as $value) {
-				$userID = $value['userID'];
-				$data = array(
-					'ticket_id' 		=> $insert_id,
-					'bu_id' 			=> $value['buId'],
-					'product_id' 		=> $value['gcarProdId'],
-					'uom_id' 			=> $value['uom'],
-					'quantity' 			=> $value['cartQty'],
-					'price' 			=> $value['price_with_vat'],
-					'total_price' 		=> $value['price_with_vat'] * $value['cartQty'],
-					'icoos' 			=> $value['icoos'],
-					'pending_status' 	=> '1',
-					'user_id' 			=> $value['userID'],
-					'created_at' 		=> date('Y-m-d H:i:s'),
-					'updated_at' 		=> date('Y-m-d H:i:s')
-				);
-				$this->db->insert('gc_final_order', $data);
+			];
 
-				
-				$this->pusher()->trigger("private-grocery-order-submitted.{$buId}", 'App\Events\GroceryOrderSubmitted', array('message' => ''));
-
-			}
-
-			foreach ($stores as $key => $buId) {
-
-				$date 					= $dates[$key];
-				$time 					= $times[$key];
-				$placeRemark 			= $placeRemarks[$key];
-
-				$dat = [
-					'ticket_id' 	=> $insert_id,
-					'bu_id' 		=> $buId,
-					'mode_of_order' => 1,
-					'order_pickup' 	=> date('Y-m-d H:i:s', strtotime("$date $time")),
-					'user_id' 		=> $userID,
-					'submitted_at' 	=> date('Y-m-d H:i:s'),
-					'created_at' 	=> date('Y-m-d H:i:s'),
-					'updated_at' 	=> date('Y-m-d H:i:s')
-					
-				];
-	
-				$this->db->insert('gc_order_statuses', $dat);
-			
-
+			$this->db->insert('gc_order_statuses', $dat);
 			$s = array("'");
 			$r = array("");
 			$instruct = str_replace($s, $r, $placeRemark);
-			
+
 			$dat1 = [
 				'ticket_id' 	=> $insert_id,
 				'bu_id' 		=> $buId,
@@ -9575,9 +9515,7 @@ public function placeOrder_pickup_mod2(
 				'created_at' 	=> date('Y-m-d H:i:s'),
 				'updated_at' 	=> date('Y-m-d H:i:s')
 			];
-
 			$this->db->insert('gc_special_instructions', $dat1);
-
 		}
 
 		$dat2 = [
@@ -9610,13 +9548,10 @@ public function placeOrder_pickup_mod2(
 				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s')
 			);
-
 			$this->db->insert('customer_delivery_infos', $infos);
 		}
-
 		$this->db->where_in('id', $tempId);
 		$this->db->delete('app_cart_gc');
-
 	}
 
 
@@ -9712,14 +9647,11 @@ public function placeOrder_pickup_mod2(
 	{
 		$data = array(
 			'customer_id' => $userID,
-			'mobile_number' => '+63'.$number,
+			'mobile_number' => '+63' . $number,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		);
 		$this->db->insert('customer_numbers', $data);
-
-	
-
 	}
 
 	public function uploadProfilePic_mod($userID, $picName)
@@ -9732,11 +9664,9 @@ public function placeOrder_pickup_mod2(
 		$post_data = array();
 		foreach ($res as $value) {
 
-		$this->db->where('customer_id', $userID);
-		$this->db->update('app_users', array('picture' => 'storage/uploads/profile_pics/' . $picName . '.jpeg'));
-	}
-		
-    	
+			$this->db->where('customer_id', $userID);
+			$this->db->update('app_users', array('picture' => 'storage/uploads/profile_pics/' . $picName . '.jpeg'));
+		}
 	}
 
 	// public function uploadId1_mod($userID,$discountId,$name,$idNumber,$imageName,$imageBookletName){
@@ -9764,9 +9694,9 @@ public function placeOrder_pickup_mod2(
 		$post_data = array();
 		foreach ($res as $value) {
 			if ($value['image_path'] == null) {
-			  $picture  = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
+				$picture  = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg";
 			} else {
-			  $picture = $this->profileImage . $value['image_path'];
+				$picture = $this->profileImage . $value['image_path'];
 			}
 			$post_data[] = array(
 				'id' => $value['cs_id'],
@@ -9775,9 +9705,9 @@ public function placeOrder_pickup_mod2(
 				'dicount_id' => $value['id'],
 				'discount_no' => $value['id_number'],
 				'discount_percent' => $value['discount_percent'] / 100 * 100 . "%",
-			  	'd_photo' =>  $picture
+				'd_photo' =>  $picture
 			);
-		  }
+		}
 		// foreach ($res as $value) {
 		// 	$post_data[] = array(
 		// 		'id' => $value['cs_id'],
@@ -9867,7 +9797,7 @@ public function placeOrder_pickup_mod2(
 	public function verifyOTP_mod($userID, $my_number, $otp_num)
 	{
 
-		
+
 		$this->db->set('status', '1');
 		$this->db->where('contact_num', $my_number);
 		$this->db->update('user_verification_codes');
@@ -9881,7 +9811,6 @@ public function placeOrder_pickup_mod2(
 			'updated_at' => date('Y-m-d H:i:s')
 		);
 		$this->db->insert('user_verification_codes', $data);
-
 	}
 
 	public function recoverOTP_mod($userID, $my_number, $otp_num)
@@ -9900,7 +9829,6 @@ public function placeOrder_pickup_mod2(
 			'updated_at' => date('Y-m-d H:i:s')
 		);
 		$this->db->insert('user_recovery_codes', $data);
-
 	}
 
 	public function updateProfileOTP_mod($userID, $my_number, $otp_num)
@@ -9923,22 +9851,22 @@ public function placeOrder_pickup_mod2(
 
 	public function itexmo($number, $message, $apicode, $passwd)
 	{
-		
+
 		$ch = curl_init();
-		$itexmo = array (
+		$itexmo = array(
 			'Email' => 'itsysdev@alturasbohol.com',
 			'Password' => $passwd,
 			'Recipients' => [$number],
 			'Message' => $message,
 			'ApiCode' => $apicode,
 			'SenderId' => 'ASC',
-		  );  
-		curl_setopt($ch, CURLOPT_URL,"https://api.itexmo.com/api/broadcast");
+		);
+		curl_setopt($ch, CURLOPT_URL, "https://api.itexmo.com/api/broadcast");
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($itexmo));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($itexmo));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		return curl_exec ($ch);
-		curl_close ($ch); 
+		return curl_exec($ch);
+		curl_close($ch);
 
 		echo 'okay raka?';
 	}
@@ -10141,7 +10069,7 @@ public function placeOrder_pickup_mod2(
 		// 							and tbl_delivery_charges.status = '1'
 		// 							group by tbl_delivery_charges.town_id ");
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*');
 		$this->db->from('tbl_delivery_charges as tblcharges');
 		$this->db->join('towns as twn', 'twn.town_id = tblcharges.town_id', 'inner');
@@ -10185,7 +10113,7 @@ public function placeOrder_pickup_mod2(
 
 	public function selectBuildingType_mod()
 	{
-	
+
 		$this->db->select('*');
 		$this->db->from('building_type');
 		$this->db->where('status', '1');
@@ -10207,7 +10135,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->set('firstname',  $firstName);
 		$this->db->where('customer_id', $userID);
 		$this->db->update('app_users');
-		
+
 		$this->db->set('lastname',  $lastName);
 		$this->db->where('customer_id', $userID);
 		$this->db->update('app_users');
@@ -10216,7 +10144,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->where('customer_id', $userID);
 		$this->db->update('app_users');
 
-		$this->db->set('mobile_number',  '0'.$mobileNumber);
+		$this->db->set('mobile_number',  '0' . $mobileNumber);
 		$this->db->where('customer_id', $userID);
 		$this->db->update('app_users');
 
@@ -10252,7 +10180,7 @@ public function placeOrder_pickup_mod2(
 		$this->db->where('id', $id);
 		$this->db->where('customer_id', $userID);
 		$this->db->update('customer_addresses');
-		
+
 		$this->db->set('land_mark',  $landMark);
 		$this->db->where('id', $id);
 		$this->db->where('customer_id', $userID);
@@ -10277,19 +10205,27 @@ public function placeOrder_pickup_mod2(
 		$this->db->where('id', $id);
 		$this->db->where('customer_id', $userID);
 		$this->db->update('customer_addresses');
-
 	}
 
-	public function submitNewAddress_mod($userID, $firstName, $lastName, $mobileNum, 
-	$houseUnit, $streetPurok, $landMark, $otherNotes, $barangayID, $addressType)
-	{
+	public function submitNewAddress_mod(
+		$userID,
+		$firstName,
+		$lastName,
+		$mobileNum,
+		$houseUnit,
+		$streetPurok,
+		$landMark,
+		$otherNotes,
+		$barangayID,
+		$addressType
+	) {
 		$this->db->select('*');
 		$this->db->from('customer_addresses');
 		$this->db->where('shipping', '1');
 		$this->db->where('customer_id', $userID);
 		$query = $this->db->get();
 		$res = $query->result_array();
-		if (!empty($res)){
+		if (!empty($res)) {
 			$this->db->set('shipping', '0');
 			$this->db->where('customer_id', $userID);
 			$this->db->update('customer_addresses');
@@ -10328,10 +10264,10 @@ public function placeOrder_pickup_mod2(
 			);
 			$this->db->insert('customer_addresses', $data);
 		}
-		
 	}
 
-	public function loadAdresses_mod($idd, $userID) {
+	public function loadAdresses_mod($idd, $userID)
+	{
 		$this->db->select('*,cust_add.id as csid, cust_add.mobile_number, twn.town_id as town_ids');
 		$this->db->from('customer_addresses as cust_add');
 		$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
@@ -10344,7 +10280,7 @@ public function placeOrder_pickup_mod2(
 		$post_data = array();
 		foreach ($res as $value) {
 			$post_data[] = array(
-			
+
 				'd_customerId' => $value['customer_id'],
 				'id' => $value['csid'],
 				'd_townId' => $value['town_ids'],
@@ -10371,7 +10307,7 @@ public function placeOrder_pickup_mod2(
 	public function loadAddress_mod($cusId)
 	{
 
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,cust_add.id as csid, twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 		$this->db->from('customer_addresses as cust_add');
 		$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
@@ -10384,12 +10320,12 @@ public function placeOrder_pickup_mod2(
 		$query = $this->db->get();
 		$res = $query->result_array();
 		if (count($res) == 0) {
-			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 			$this->db->select('*,cust_add.id as csid,twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 			$this->db->from('customer_addresses as cust_add');
 			$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
 			$this->db->join('towns as twn', 'twn.town_id = brg.town_id', 'inner');
-			$this->db->join('province as prov', 'prov.prov_id = twn.prov_id', 'inner');	
+			$this->db->join('province as prov', 'prov.prov_id = twn.prov_id', 'inner');
 			$this->db->join('tbl_delivery_charges as tblcharges', 'tblcharges.brgy_id = cust_add.barangay_id', 'left');
 			$this->db->join('app_users as uppsu', 'uppsu.customer_id = cust_add.customer_id', 'inner');
 			$this->db->where('cust_add.customer_id', $cusId);
@@ -10454,7 +10390,7 @@ public function placeOrder_pickup_mod2(
 
 	public function submitLoadAddress_mod($cusId, $groupID)
 	{
-		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('*,cust_add.id as csid, twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 		$this->db->from('customer_addresses as cust_add');
 		$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
@@ -10468,12 +10404,12 @@ public function placeOrder_pickup_mod2(
 		$query = $this->db->get();
 		$res = $query->result_array();
 		if (count($res) == 0) {
-			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));") ;
+			$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 			$this->db->select('*,cust_add.id as csid,twn.town_id as town_ids,cust_add.firstname,cust_add.lastname, cust_add.mobile_number');
 			$this->db->from('customer_addresses as cust_add');
 			$this->db->join('barangays as brg', 'brg.brgy_id = cust_add.barangay_id', 'inner');
 			$this->db->join('towns as twn', 'twn.town_id = brg.town_id', 'inner');
-			$this->db->join('province as prov', 'prov.prov_id = twn.prov_id', 'inner');	
+			$this->db->join('province as prov', 'prov.prov_id = twn.prov_id', 'inner');
 			$this->db->join('tbl_delivery_charges as tblcharges', 'tblcharges.brgy_id = cust_add.barangay_id', 'left');
 			$this->db->join('app_users as uppsu', 'uppsu.customer_id = cust_add.customer_id', 'inner');
 			$this->db->where('cust_add.customer_id', $cusId);
@@ -10541,7 +10477,7 @@ public function placeOrder_pickup_mod2(
 		}
 	}
 
-	public function checkTownID($townID) 
+	public function checkTownID($townID)
 	{
 		$this->db->select('town_id');
 		$this->db->from('good_delivery_charges');
@@ -10600,7 +10536,7 @@ public function placeOrder_pickup_mod2(
 				'rider_stat' => $value['main_rider_stat'],
 				'ticket_id'  => $value['ticket_id'],
 				'delivered_status' => $value['delevered_status']
-				
+
 			);
 		}
 		$item = array('user_details' => $post_data);
@@ -10635,12 +10571,12 @@ public function placeOrder_pickup_mod2(
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-		foreach($res as $value){
+		foreach ($res as $value) {
 
 			$phone_no = $value['mobile_number'];
 			$number = preg_replace('/^\+?63|\|1|\D/', '', ($phone_no));
 
-			$this->db->set('mobile_number', '0'.$number);
+			$this->db->set('mobile_number', '0' . $number);
 			$this->db->where('customer_id', $customerId);
 			$this->db->update('app_users');
 		}
@@ -10648,7 +10584,7 @@ public function placeOrder_pickup_mod2(
 
 	public function updateNumber_mod($id, $updateNumber)
 	{
-		$this->db->set('mobile_number', '+63'.$updateNumber);
+		$this->db->set('mobile_number', '+63' . $updateNumber);
 		$this->db->where('id', $id);
 		$this->db->update('customer_numbers');
 	}
@@ -10676,16 +10612,14 @@ public function placeOrder_pickup_mod2(
 		$query = $this->db->get();
 		$res = $query->result_array();
 
-		foreach ($res as $key){
+		foreach ($res as $key) {
 			$date = $date_array[$key];
 			$time = $time_array[$key];
 
 			$this->db->set('pickup_at', date('Y-m-d H:i:s', strtotime("$date $time")));
 			$this->db->where('ticket_id', $insert_id);
 			$this->db->update('toms_customer_orders');
-
 		}
-
 	}
 
 	public function pusher()
@@ -10841,7 +10775,7 @@ public function placeOrder_pickup_mod2(
 		echo json_encode($item);
 	}
 
-	public function checkBuId_mod($cusId, $bunitCode) 
+	public function checkBuId_mod($cusId, $bunitCode)
 	{
 		$this->db->select('*');
 		$this->db->from('app_cart_gc as cart_temp');
@@ -10857,12 +10791,9 @@ public function placeOrder_pickup_mod2(
 		}
 		$item = array('user_details' => $post_data);
 		echo json_encode($item);
-		
-
-
 	}
 
-	
+
 
 	public function search_item_mod($query, $unitGroupId)
 	{
@@ -10920,10 +10851,10 @@ public function placeOrder_pickup_mod2(
 			echo "wrongPass";
 		} else if (!empty($res2)) {
 			echo "samePass";
-		} 
-			$this->db->set('password2', md5($newpass));
-			$this->db->where('customer_id', $cusId);
-			$this->db->update('app_users');
+		}
+		$this->db->set('password2', md5($newpass));
+		$this->db->where('customer_id', $cusId);
+		$this->db->update('app_users');
 	}
 
 	public function updateUsername_mod($cusId, $currentpass, $newUsername)
@@ -10944,7 +10875,7 @@ public function placeOrder_pickup_mod2(
 
 		if (empty($res)) {
 			echo "wrongPass";
-		} else if (!empty($res2)){
+		} else if (!empty($res2)) {
 			echo "userTaken";
 		} else {
 			$this->db->set('username', $newUsername);

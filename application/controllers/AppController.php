@@ -22,15 +22,15 @@ class AppController extends CI_Controller
 	public function appCreateAccountCtrl()
 	{
 		// if(isset($_POST['townId']) && isset($_POST['barrioId']) && isset($_POST['username']) && isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['suffix']) && isset($_POST['password']) && isset($_POST['birthday']) && isset($_POST['contactNumber'])){
-
 		$this->AppModel->appCreateAccountMod(
-			$this->decrypt($_POST['firstName']), 
-			$this->decrypt($_POST['lastName']), 
-			$this->decrypt($_POST['email']), 
-			$this->decrypt($_POST['birthday']), 
-			$this->decrypt($_POST['contactNumber']), 
-			$this->decrypt($_POST['username']), 
-			$this->decrypt($_POST['password']));
+			$this->decrypt($_POST['firstName']),
+			$this->decrypt($_POST['lastName']),
+			$this->decrypt($_POST['email']),
+			$this->decrypt($_POST['birthday']),
+			$this->decrypt($_POST['contactNumber']),
+			$this->decrypt($_POST['username']),
+			$this->decrypt($_POST['password'])
+		);
 		// }
 	}
 
@@ -38,17 +38,16 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['_usernameLogIn']) && isset($_POST['_passwordLogIn'])) {
 			$this->AppModel->signInUserMod($this->decrypt($_POST['_usernameLogIn']), $this->decrypt($_POST['_passwordLogIn']));
-		// $this->AppModel->signInUserMod('jen', '12345');
+			// $this->AppModel->signInUserMod('jen', '12345');
 		}
 	}
 
 	public function getUserDataCtrl()
 	{
 		if (isset($_POST['id'])) {
-		$this->AppModel->getUserDataMod($this->decrypt($_POST['id']));
-		// $this->AppModel->getUserDataMod('368');
+			$this->AppModel->getUserDataMod($this->decrypt($_POST['id']));
+			// $this->AppModel->getUserDataMod('368');
 		}
-
 	}
 
 	public function getPlaceOrderDataCtrl()
@@ -63,7 +62,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['townId'])) {
 			$this->AppModel->checkAllowedPlaceMod(
-				$this->decrypt($_POST['townId']));
+				$this->decrypt($_POST['townId'])
+			);
 		}
 	}
 
@@ -71,7 +71,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['townId'])) {
 			$this->AppModel->checkFeeMod(
-				$this->decrypt($_POST['townId']));
+				$this->decrypt($_POST['townId'])
+			);
 			// $this->AppModel->checkFeeMod('6');
 		}
 	}
@@ -80,7 +81,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getOrderDataMod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 			// $this->AppModel->getOrderDataMod('2282');
 		}
 	}
@@ -89,7 +91,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getMobileNumber_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 			// $this->AppModel->getOrderDataMod('2282');
 		}
 	}
@@ -98,7 +101,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getAppUser_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 			// $this->AppModel->getOrderDataMod('2282');
 		}
 	}
@@ -107,7 +111,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->getSubtotalMod(
-				$this->decrypt($_POST['customerId']));
+				$this->decrypt($_POST['customerId'])
+			);
 			// $this->AppModel->getSubtotalMod('1628');
 		}
 	}
@@ -117,7 +122,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['orderNo'])) {
 			$this->AppModel->getLastItems_mod(
-				$this->decrypt($_POST['orderNo']));
+				$this->decrypt($_POST['orderNo'])
+			);
 		}
 	}
 
@@ -132,7 +138,8 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getBuGroupID_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 	}
 
@@ -140,7 +147,8 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->gcGetAddress_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 	}
 
@@ -148,7 +156,8 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->gcLoadBu_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 	}
 
@@ -157,7 +166,8 @@ class AppController extends CI_Controller
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->gcLoadBu2_mod(
 				$this->decrypt($_POST['cusId']),
-				$this->decrypt($_POST['tempID']));
+				$this->decrypt($_POST['tempID'])
+			);
 		}
 	}
 
@@ -165,7 +175,8 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getBu_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 	}
 
@@ -173,7 +184,8 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getBu_mod1(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->getBu_mod1('2423');
 	}
@@ -182,8 +194,9 @@ class AppController extends CI_Controller
 	{ // para mailhan ug nag double ang malls ang iyang gipang palitan
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getBu_mod2(
-				$this->decrypt($_POST['cusId']), 
-				$this->decrypt($_POST['productID']));
+				$this->decrypt($_POST['cusId']),
+				$this->decrypt($_POST['productID'])
+			);
 		}
 		// $this->AppModel->getBu_mod1('2423');
 	}
@@ -192,7 +205,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTenant_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 			// 	// $this->AppModel->getTenant_mod('163');
 		}
 		// $this->AppModel->getTenant_mod('2423');
@@ -202,8 +216,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTenant_mod2(
-				$this->decrypt($_POST['cusId']), 
-				$this->decrypt($_POST['productID']));
+				$this->decrypt($_POST['cusId']),
+				$this->decrypt($_POST['productID'])
+			);
 			// 	// $this->AppModel->getTenant_mod('163');
 		}
 		// $this->AppModel->getTenant_mod('2423');
@@ -214,7 +229,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTicketNoOnFoods_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->getTicketNoFood_mod('1815');
 	}
@@ -223,16 +239,18 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTicketNoOnGoods_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->getTicketNoFood_mod('1815');
 	}
 
 	public function getTicketNoFood_ontrans_ctrl()
 	{
-		if(isset($_POST['cusId'])){
+		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTicketNoFood_ontrans_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->getTicketNoFood_ontrans_mod('2423');
 	}
@@ -240,9 +258,10 @@ class AppController extends CI_Controller
 
 	public function getTicketNoFood_delivered_ctrl()
 	{
-		if(isset($_POST['cusId'])){
+		if (isset($_POST['cusId'])) {
 			$this->AppModel->getTicketNoFood_delivered_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->getTicketNoFood_delivered_mod('2423');
 	}
@@ -253,7 +272,8 @@ class AppController extends CI_Controller
 		// 	$this->AppModel->getTicketNoFood_delivered_mod($_POST['cusId']);
 		// }
 		$this->AppModel->getTicket_cancelled_mod(
-			$this->decrypt($_POST['cusId']));
+			$this->decrypt($_POST['cusId'])
+		);
 	}
 
 
@@ -264,12 +284,13 @@ class AppController extends CI_Controller
 	// 		// $this->AppModel->getTicketNoGood_mod('465');
 	// }
 
-	
+
 	public function lookItems_ctrl()
 	{
 		if (isset($_POST['ticketNo'])) {
 			$this->AppModel->lookItems_mod(
-				$this->decrypt($_POST['ticketNo']));
+				$this->decrypt($_POST['ticketNo'])
+			);
 		}
 		// $this->AppModel->lookItems_mod('210705-2-001');
 	}
@@ -277,39 +298,44 @@ class AppController extends CI_Controller
 	public function getContainer_ctrl()
 	{
 		$this->AppModel->getContainer_mod(
-			$this->decrypt($_POST['ticketId']), 
-			$this->decrypt($_POST['tenantId']));
+			$this->decrypt($_POST['ticketId']),
+			$this->decrypt($_POST['tenantId'])
+		);
 	}
 
 	public function orderTimeFrameDelivery_ctrl()
 	{
 		$this->AppModel->orderTimeFrameDelivery_mod(
-			$this->decrypt($_POST['ticketNo']), 
-			$this->decrypt($_POST['tenantId']));
+			$this->decrypt($_POST['ticketNo']),
+			$this->decrypt($_POST['tenantId'])
+		);
 	}
 
 	public function orderTimeFramePickUp_ctrl()
 	{
 		$this->AppModel->orderTimeFramePickUp_mod(
-			$this->decrypt($_POST['ticketNo']), 
-			$this->decrypt($_POST['tenantId']));
+			$this->decrypt($_POST['ticketNo']),
+			$this->decrypt($_POST['tenantId'])
+		);
 	}
 
 	public function orderTimeFramePickUpGoods_ctrl()
 	{
 		$this->AppModel->orderTimeFramePickUpGoods_mod(
-			$this->decrypt($_POST['ticketId']), 
-			$this->decrypt($_POST['buId']));
+			$this->decrypt($_POST['ticketId']),
+			$this->decrypt($_POST['buId'])
+		);
 	}
 
 	public function getCancelStatus_ctrl()
 	{
 		// if (isset($_POST['ticketNo'])) {
-			// $this->AppModel->orderTimeFrame_mod($this->decrypt($_POST['ticketNo']));
+		// $this->AppModel->orderTimeFrame_mod($this->decrypt($_POST['ticketNo']));
 		// }
 		// $this->AppModel->getCancelStatusMod('ticketNo');
 		$this->AppModel->getCancelStatusMod(
-			$this->decrypt($_POST['ticketNo']));
+			$this->decrypt($_POST['ticketNo'])
+		);
 	}
 
 
@@ -366,7 +392,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->loadCartDataNew_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 			// $this->AppModel->loadCartDataNew_mod(3822);
 		}
 	}
@@ -375,8 +402,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->loadCartDataNew2_mod(
-				$this->decrypt($_POST['cusId']), 
-				$this->decrypt($_POST['productID']));
+				$this->decrypt($_POST['cusId']),
+				$this->decrypt($_POST['productID'])
+			);
 			// $this->AppModel->loadCartDataNew_mod(3822);
 		}
 	}
@@ -399,8 +427,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId']) && isset($_POST['tenantId'])) {
 			$this->AppModel->displayOrder_mod(
-				$this->decrypt($_POST['cusId']), 
-				$this->decrypt($_POST['tenantId']));
+				$this->decrypt($_POST['cusId']),
+				$this->decrypt($_POST['tenantId'])
+			);
 			// $this->AppModel->displayOrder_mod('163','9');
 		}
 	}
@@ -409,8 +438,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId']) && isset($_POST['discountName'])) {
 			$this->AppModel->getDiscountID_mod(
-				$this->decrypt($_POST['cusId']), 
-				$this->decrypt($_POST['discountName']));
+				$this->decrypt($_POST['cusId']),
+				$this->decrypt($_POST['discountName'])
+			);
 			// $this->AppModel->displayOrder_mod('163','9');
 		}
 	}
@@ -419,8 +449,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId']) && isset($_POST['townId'])) {
 			$this->AppModel->trapTenantLimit_mod(
-				$this->decrypt($_POST['townId']), 
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['townId']),
+				$this->decrypt($_POST['cusId'])
+			);
 			// $this->AppModel->trapTenantLimit_mod('1','1628');
 		}
 	}
@@ -446,15 +477,17 @@ class AppController extends CI_Controller
 	public function display_tenant_ctrl()
 	{
 		$this->AppModel->display_tenant_mod(
-			$this->decrypt($_POST['buCode']), 
-			$this->decrypt($_POST['globalID']));
+			$this->decrypt($_POST['buCode']),
+			$this->decrypt($_POST['globalID'])
+		);
 	}
 
 	public function display_restaurant_ctrl()
 	{
 		if (isset($_POST['categoryId'])) {
 			$this->AppModel->display_restaurant_mod(
-				$this->decrypt($_POST['categoryId']));
+				$this->decrypt($_POST['categoryId'])
+			);
 			// $this->AppModel->display_restaurant_mod('27');
 		}
 	}
@@ -463,8 +496,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId']) && isset($_POST['productUom'])) {
 			$this->AppModel->display_item_data_mod(
-				$this->decrypt($_POST['prodId']), 
-				$this->decrypt($_POST['productUom']));
+				$this->decrypt($_POST['prodId']),
+				$this->decrypt($_POST['productUom'])
+			);
 		}
 		// $this->AppModel->display_item_data_mod('97', null);
 	}
@@ -473,7 +507,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->getSuggestion_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 		// $this->AppModel->display_item_data_mod('97', null);
 	}
@@ -506,7 +541,7 @@ class AppController extends CI_Controller
 
 	public function addTempCartPickup_ctrl()
 	{
-	
+
 		$this->AppModel->addTempCartPickup_mod(
 			$this->decrypt($_POST['userID']),
 			$this->decrypt($_POST['orderID']),
@@ -519,12 +554,11 @@ class AppController extends CI_Controller
 			$this->decrypt($_POST['icoos']),
 
 		);
-	
 	}
 
 	public function addTempCartDelivery_ctrl()
 	{
-	
+
 		$this->AppModel->addTempCartDelivery_mod(
 			$this->decrypt($_POST['userID']),
 			$this->decrypt($_POST['orderID']),
@@ -535,14 +569,13 @@ class AppController extends CI_Controller
 			$this->decrypt($_POST['measurement']),
 			$this->decrypt($_POST['totalPrice']),
 			$this->decrypt($_POST['icoos']),
-			
+
 		);
-	
 	}
 
 	public function addToCartNew_ctrl()
 	{
-		if(isset($_POST['userID'])){
+		if (isset($_POST['userID'])) {
 			$this->AppModel->addToCartNew_mod(
 				$this->decrypt($_POST['userID']),
 				$this->decrypt($_POST['prodId']),
@@ -550,15 +583,15 @@ class AppController extends CI_Controller
 				$this->decrypt($_POST['_counter']),
 				$this->decrypt($_POST['uomPrice']),
 				$this->decrypt($_POST['measurement']),
-	
+
 				$this->decrypt($_POST['choiceUomIdDrinks']),
 				$this->decrypt($_POST['choiceIdDrinks']),
 				$this->decrypt($_POST['choicePriceDrinks']),
-	
+
 				$this->decrypt($_POST['choiceUomIdFries']),
 				$this->decrypt($_POST['choiceIdFries']),
 				$this->decrypt($_POST['choicePriceFries']),
-	
+
 				$this->decrypt($_POST['choiceUomIdSides']),
 				$this->decrypt($_POST['choiceIdSides']),
 				$this->decrypt($_POST['choicePriceSides']),
@@ -660,7 +693,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['townId'])) {
 			$this->AppModel->getbarrio_mod(
-				$this->decrypt($_POST['townId']));
+				$this->decrypt($_POST['townId'])
+			);
 		}
 	}
 
@@ -671,8 +705,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['id'])) {
 			$this->AppModel->updateCartQty_mod(
-				$this->decrypt($_POST['id']), 
-				$this->decrypt($_POST['qty']));
+				$this->decrypt($_POST['id']),
+				$this->decrypt($_POST['qty'])
+			);
 			// $this->AppModel->updateCartQty_mod(36, 12);
 		}
 	}
@@ -681,8 +716,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['id'])) {
 			$this->AppModel->updateCartStk_mod(
-				$this->decrypt($_POST['id']), 
-				$this->decrypt($_POST['stk']));
+				$this->decrypt($_POST['id']),
+				$this->decrypt($_POST['stk'])
+			);
 			// $this->AppModel->updateCartQty_mod(36, 12);
 		}
 	}
@@ -691,8 +727,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['id'])) {
 			$this->AppModel->updateCartIcoos_mod(
-				$this->decrypt($_POST['id']), 
-				$this->decrypt($_POST['stk']));
+				$this->decrypt($_POST['id']),
+				$this->decrypt($_POST['stk'])
+			);
 			// $this->AppModel->updateCartQty_mod(36, 12);
 		}
 	}
@@ -701,7 +738,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->getCounter_mod(
-				$this->decrypt($_POST['customerId']));
+				$this->decrypt($_POST['customerId'])
+			);
 		}
 	}
 
@@ -791,34 +829,34 @@ class AppController extends CI_Controller
 
 	public function savePickup_ctrl()
 	{
-		if(isset($_POST['customerId'])) {
+		if (isset($_POST['customerId'])) {
 
-		$this->AppModel->placeOrder_pickup_mod(
-			$this->decrypt($_POST['customerId']),
-			$this->decrypt($_POST['deliveryDateData']),
-			$this->decrypt($_POST['deliveryTimeData']),
-			$this->decrypt($_POST['getTenantData']),
-			$this->decrypt($_POST['specialInstruction']),
-			$this->decrypt($_POST['subtotal']),
-			$this->decrypt($_POST['selectedDiscountType']),
-			$this->decrypt($_POST['productID']),
+			$this->AppModel->placeOrder_pickup_mod(
+				$this->decrypt($_POST['customerId']),
+				$this->decrypt($_POST['deliveryDateData']),
+				$this->decrypt($_POST['deliveryTimeData']),
+				$this->decrypt($_POST['getTenantData']),
+				$this->decrypt($_POST['specialInstruction']),
+				$this->decrypt($_POST['subtotal']),
+				$this->decrypt($_POST['selectedDiscountType']),
+				$this->decrypt($_POST['productID']),
 			);
 		}
 	}
 
 	public function savePickup_ctrl2()
 	{
-		if(isset($_POST['customerId'])) {
+		if (isset($_POST['customerId'])) {
 
-		$this->AppModel->placeOrder_pickup_mod2(
-			$this->decrypt($_POST['customerId']),
-			$this->decrypt($_POST['deliveryDateData']),
-			$this->decrypt($_POST['deliveryTimeData']),
-			$this->decrypt($_POST['getTenantData']),
-			$this->decrypt($_POST['specialInstruction']),
-			$this->decrypt($_POST['subtotal']),
-			$this->decrypt($_POST['selectedDiscountType']),
-			$this->decrypt($_POST['productID']),
+			$this->AppModel->placeOrder_pickup_mod2(
+				$this->decrypt($_POST['customerId']),
+				$this->decrypt($_POST['deliveryDateData']),
+				$this->decrypt($_POST['deliveryTimeData']),
+				$this->decrypt($_POST['getTenantData']),
+				$this->decrypt($_POST['specialInstruction']),
+				$this->decrypt($_POST['subtotal']),
+				$this->decrypt($_POST['selectedDiscountType']),
+				$this->decrypt($_POST['productID']),
 			);
 		}
 	}
@@ -834,7 +872,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->loadSubTotalnew_mod(
-				$this->decrypt($_POST['customerId']));
+				$this->decrypt($_POST['customerId'])
+			);
 		}
 		// $this->AppModel->loadSubTotalnew_mod('2423');
 	}
@@ -843,8 +882,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->loadSubTotalnew_mod2(
-				$this->decrypt($_POST['customerId']), 
-				$this->decrypt($_POST['productID']));
+				$this->decrypt($_POST['customerId']),
+				$this->decrypt($_POST['productID'])
+			);
 		}
 		// $this->AppModel->loadSubTotalnew_mod('2423');
 	}
@@ -876,7 +916,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadFlavor_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -884,7 +925,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadDrinks_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 		// $this->AppModel->loadDrinks_mod('111');
 	}
@@ -893,7 +935,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadFries_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -901,7 +944,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadSide_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -909,7 +953,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->checkAddon_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -917,7 +962,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadAddonSide_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -925,7 +971,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['prodId'])) {
 			$this->AppModel->loadAddonDessert_mod(
-				$this->decrypt($_POST['prodId']));
+				$this->decrypt($_POST['prodId'])
+			);
 		}
 	}
 
@@ -933,8 +980,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tenantID']) && isset($_POST['ticketID'])) {
 			$this->AppModel->cancelOrderTenant_mod(
-				$this->decrypt($_POST['tenantID']), 
-				$this->decrypt($_POST['ticketID']));
+				$this->decrypt($_POST['tenantID']),
+				$this->decrypt($_POST['ticketID'])
+			);
 		}
 
 		// $this->AppModel->cancelOrderSingleFood_mod('6693','4185');
@@ -944,8 +992,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['buId']) && isset($_POST['ticketID'])) {
 			$this->AppModel->cancelOrderGoods_mod(
-				$this->decrypt($_POST['buId']), 
-				$this->decrypt($_POST['ticketID']));
+				$this->decrypt($_POST['buId']),
+				$this->decrypt($_POST['ticketID'])
+			);
 		}
 
 		// $this->AppModel->cancelOrderSingleFood_mod('6693','4185');
@@ -956,8 +1005,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tomsId']) && isset($_POST['ticketId'])) {
 			$this->AppModel->cancelOrderSingleFood_mod(
-				$this->decrypt($_POST['tomsId']), 
-				$this->decrypt($_POST['ticketId']));
+				$this->decrypt($_POST['tomsId']),
+				$this->decrypt($_POST['ticketId'])
+			);
 		}
 
 		// $this->AppModel->cancelOrderSingleFood_mod('6693','4185');
@@ -967,8 +1017,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tomsId']) && isset($_POST['ticketId'])) {
 			$this->AppModel->cancelOrderSingleGood_mod(
-				$this->decrypt($_POST['tomsId']), 
-				$this->decrypt($_POST['ticketId']));
+				$this->decrypt($_POST['tomsId']),
+				$this->decrypt($_POST['ticketId'])
+			);
 		}
 	}
 
@@ -999,7 +1050,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['ticketID'])) {
 			$this->AppModel->getDiscount_mod(
-				$this->decrypt($_POST['ticketID']));
+				$this->decrypt($_POST['ticketID'])
+			);
 		}
 		// $this->AppModel->getTotal_mod('210714-2-002');
 	}
@@ -1096,7 +1148,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['ticketNo'])) {
 			$this->AppModel->checkifongoing_mod(
-				$this->decrypt($_POST['ticketNo']));
+				$this->decrypt($_POST['ticketNo'])
+			);
 			// $this->AppModel->checkifongoing_mod('210415-2-003');
 		}
 	}
@@ -1113,7 +1166,8 @@ class AppController extends CI_Controller
 
 			// $this->AppModel->checkifemptystore_mod('14');
 			$this->AppModel->checkifemptystore_mod(
-				$this->decrypt($_POST['tenantCode']));
+				$this->decrypt($_POST['tenantCode'])
+			);
 		}
 	}
 
@@ -1121,7 +1175,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tenantCode'])) {
 			$this->AppModel->getCategories_mod(
-				$this->decrypt($_POST['tenantCode']));
+				$this->decrypt($_POST['tenantCode'])
+			);
 		}
 	}
 
@@ -1130,7 +1185,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['categoryId'])) {
 			$this->AppModel->getItemsBycategories_mod(
-				$this->decrypt($_POST['categoryId']));
+				$this->decrypt($_POST['categoryId'])
+			);
 			// $this->AppModel->getItemsBycategories_mod('27');
 		}
 	}
@@ -1139,7 +1195,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tenantCode'])) {
 			$this->AppModel->getItemsByCategoriesAll_mod(
-				$this->decrypt($_POST['tenantCode']));
+				$this->decrypt($_POST['tenantCode'])
+			);
 			// $this->AppModel->getItemsBycategories_mod('32');
 		}
 	}
@@ -1148,11 +1205,11 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['offset']) &&  isset($_POST['categoryNo']) && isset($_POST['itemSearch'])) {
 			$this->AppModel->getGcItems_mod(
-				$_POST['offset'], 
-				$_POST['categoryNo'], 
+				$_POST['offset'],
+				$_POST['categoryNo'],
 				$_POST['groupCode'],
 				$_POST['itemSearch']
-				);
+			);
 			// $this->AppModel->getGcItems_mod('10', '130', '');
 		}
 	}
@@ -1160,33 +1217,37 @@ class AppController extends CI_Controller
 
 	public function addToCartGc_ctrl()
 	{
-		if (isset($_POST['userID']) && 
-		isset($_POST['userID']) && 
-		isset($_POST['buCode']) && 
-		isset($_POST['prodId']) && 
-		isset($_POST['itemCode']) && 
-		isset($_POST['uomSymbol']) && 
-		isset($_POST['uom'])  && 
-		isset($_POST['_counter'])) {
+		if (
+			isset($_POST['userID']) &&
+			isset($_POST['userID']) &&
+			isset($_POST['buCode']) &&
+			isset($_POST['prodId']) &&
+			isset($_POST['itemCode']) &&
+			isset($_POST['uomSymbol']) &&
+			isset($_POST['uom'])  &&
+			isset($_POST['_counter'])
+		) {
 			$this->AppModel->addToCartGc_mod(
-				$this->decrypt($_POST['userID']), 
-				$this->decrypt($_POST['buCode']), 
-				$this->decrypt($_POST['prodId']), 
-				$this->decrypt($_POST['itemCode']), 
-				$this->decrypt($_POST['uomSymbol']), 
-				$this->decrypt($_POST['uom']), 
-				$this->decrypt($_POST['_counter']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['buCode']),
+				$this->decrypt($_POST['prodId']),
+				$this->decrypt($_POST['itemCode']),
+				$this->decrypt($_POST['uomSymbol']),
+				$this->decrypt($_POST['uom']),
+				$this->decrypt($_POST['_counter'])
+			);
 			// $this->AppModel->addToCartGc_mod('12121','12','12','12','1');
 		}
 	}
 
-	
+
 
 	public function gc_loadPriceGroup_ctrl()
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->gc_loadPriceGroup_mod(
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 			// $this->AppModel->gc_cart_mod('1628');
 		}
 	}
@@ -1195,7 +1256,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->getStore_mod(
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 			// 	// $this->AppModel->getTenant_mod('163');
 		}
 		// $this->AppModel->getTenant_mod('2423');
@@ -1206,8 +1268,8 @@ class AppController extends CI_Controller
 		if (isset($_POST['userID'])) {
 			$this->AppModel->getStore2_mod(
 				$this->decrypt($_POST['userID']),
-				$this->decrypt($_POST['tempID']));
-				
+				$this->decrypt($_POST['tempID'])
+			);
 		}
 		// $this->AppModel->getTenant_mod('2423');
 	}
@@ -1216,7 +1278,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->gc_cart_mod(
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 			// $this->AppModel->gc_cart_mod('1628');
 		}
 	}
@@ -1226,8 +1289,9 @@ class AppController extends CI_Controller
 		if (isset($_POST['userID'])) {
 			$this->AppModel->gc_cart2_mod(
 				$this->decrypt($_POST['userID']),
-				$this->decrypt($_POST['tempID']));
-				
+				$this->decrypt($_POST['tempID'])
+			);
+
 			// $this->AppModel->gc_cart_mod('1628');
 		}
 	}
@@ -1236,8 +1300,9 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['id'])) {
 			$this->AppModel->updateGcCartQty_mod(
-				$this->decrypt($_POST['id']), 
-				$this->decrypt($_POST['qty']));
+				$this->decrypt($_POST['id']),
+				$this->decrypt($_POST['qty'])
+			);
 		}
 	}
 
@@ -1246,7 +1311,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->loadGcSubTotal_mod(
-				$this->decrypt($_POST['customerId']));
+				$this->decrypt($_POST['customerId'])
+			);
 			// $this->AppModel->loadGcSubTotal_mod('2423');
 		}
 	}
@@ -1256,7 +1322,8 @@ class AppController extends CI_Controller
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->loadGcSubTotal2_mod(
 				$this->decrypt($_POST['customerId']),
-				$this->decrypt($_POST['tempID']));
+				$this->decrypt($_POST['tempID'])
+			);
 			// $this->AppModel->loadGcSubTotal_mod('2423');
 		}
 	}
@@ -1265,7 +1332,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['customerId'])) {
 			$this->AppModel->getGcCounter_mod(
-				$this->decrypt($_POST['customerId']));
+				$this->decrypt($_POST['customerId'])
+			);
 			// $this->AppModel->getGcCounter_mod('378');
 		}
 	}
@@ -1280,10 +1348,11 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['categoryId']) && isset($_POST['offset'])) {
 			$this->AppModel->getItemsByGcCategories_mod(
-				$this->decrypt($_POST['categoryId']), 
-				$this->decrypt($_POST['offset']), 
+				$this->decrypt($_POST['categoryId']),
+				$this->decrypt($_POST['offset']),
 				$this->decrypt($_POST['groupCode']),
-				$this->decrypt($_POST['bunitCode']));
+				$this->decrypt($_POST['bunitCode'])
+			);
 		}
 	}
 
@@ -1291,7 +1360,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cartId'])) {
 			$this->AppModel->removeGcItemFromCart_mod(
-				$this->decrypt($_POST['cartId']));
+				$this->decrypt($_POST['cartId'])
+			);
 		}
 	}
 
@@ -1302,7 +1372,7 @@ class AppController extends CI_Controller
 			$this->AppModel->getBill_mod(
 				$this->decrypt($_POST['customerId']),
 				$this->decrypt($_POST['priceG'])
-		);
+			);
 			// $this->AppModel->getBill_mod('1628');
 		}
 	}
@@ -1402,7 +1472,8 @@ class AppController extends CI_Controller
 			// $this->AppModel->gc_select_uom_mod('100462');
 			$this->AppModel->gc_select_uom_mod(
 				$this->decrypt($_POST['itemCode']),
-				$this->decrypt($_POST['groupCode']));
+				$this->decrypt($_POST['groupCode'])
+			);
 		}
 	}
 
@@ -1421,7 +1492,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->loadIdList_mod(
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 		}
 	}
 
@@ -1429,7 +1501,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['id'])) {
 			$this->AppModel->delete_id_mod(
-				$this->decrypt($_POST['id']));
+				$this->decrypt($_POST['id'])
+			);
 		}
 	}
 
@@ -1437,7 +1510,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->checkidcheckout_mod(
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 			// $this->AppModel->checkidcheckout_mod("465");
 		}
 	}
@@ -1454,7 +1528,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['usernameLogIn'])) {
 			$this->AppModel->changeAccountStat_mod(
-				$this->decrypt($_POST['usernameLogIn']));
+				$this->decrypt($_POST['usernameLogIn'])
+			);
 		}
 	}
 
@@ -1462,7 +1537,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['usernameLogIn'])) {
 			$this->AppModel->getUserDetails_mod(
-				$this->decrypt($_POST['usernameLogIn']));
+				$this->decrypt($_POST['usernameLogIn'])
+			);
 			// $this->AppModel->getUserDetails_mod('pj');
 		}
 	}
@@ -1491,14 +1567,12 @@ class AppController extends CI_Controller
 			if ($result == false) {
 				echo "iTexMo: No response from server!!!
 			Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-			Please CONTACT US for help. ";	
-			} else if ($result == false){
+			Please CONTACT US for help. ";
+			} else if ($result == false) {
 				echo 'Message Sent!';
-			} else {	
-				echo "Error Num ". $result . " was encountered!";
+			} else {
+				echo "Error Num " . $result . " was encountered!";
 			}
-
-			
 		}
 	}
 
@@ -1520,18 +1594,18 @@ class AppController extends CI_Controller
 			if ($result == false) {
 				echo "iTexMo: No response from server!!!
 			Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-			Please CONTACT US for help. ";	
-			} else if ($result == false){
+			Please CONTACT US for help. ";
+			} else if ($result == false) {
 				echo 'Message Sent!';
-			} else {	
-				echo "Error Num ". $result . " was encountered!";
+			} else {
+				echo "Error Num " . $result . " was encountered!";
 			}
 		}
 	}
 
 	public function recoverOTP_ctrl()
 	{
-		
+
 		if (isset($_POST['mobileNumber'])) {
 			$data = array();
 			$data_result = array();
@@ -1548,11 +1622,11 @@ class AppController extends CI_Controller
 			if ($result == false) {
 				echo "iTexMo: No response from server!!!
 			Please check the METHOD used (CURL or CURL-LESS). If you are using CURL then try CURL-LESS and vice versa.	
-			Please CONTACT US for help. ";	
-			} else if ($result == false){
+			Please CONTACT US for help. ";
+			} else if ($result == false) {
 				echo 'Message Sent!';
-			} else {	
-				echo "Error Num ". $result . " was encountered!";
+			} else {
+				echo "Error Num " . $result . " was encountered!";
 			}
 		}
 	}
@@ -1592,7 +1666,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['ticketID'])) {
 			$this->AppModel->getOrderTicket_mod(
-				$this->decrypt($_POST['ticketID']));
+				$this->decrypt($_POST['ticketID'])
+			);
 		}
 		// $this->AppModel->getTicketNoFood_mod('1815');
 	}
@@ -1647,11 +1722,12 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->updateProfile_mod(
-			$this->decrypt($_POST['userID']), 
-			$this->decrypt($_POST['firstName']),
-			$this->decrypt($_POST['lastName']), 
-			$this->decrypt($_POST['email']), 
-			$this->decrypt($_POST['mobileNumber']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['firstName']),
+				$this->decrypt($_POST['lastName']),
+				$this->decrypt($_POST['email']),
+				$this->decrypt($_POST['mobileNumber'])
+			);
 		}
 	}
 
@@ -1659,17 +1735,18 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->updateNewAddress_mod(
-			$this->decrypt($_POST['userID']), 
-			$this->decrypt($_POST['id']),
-			$this->decrypt($_POST['firstName']), 
-			$this->decrypt($_POST['lastName']), 
-			$this->decrypt($_POST['mobileNum']), 
-			$_POST['houseUnit'], 
-			$this->decrypt($_POST['streetPurok']), 
-			$this->decrypt($_POST['landMark']), 
-			$_POST['otherNotes'],
-			$this->decrypt($_POST['barangayID']), 
-			$this->decrypt($_POST['addressType']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['id']),
+				$this->decrypt($_POST['firstName']),
+				$this->decrypt($_POST['lastName']),
+				$this->decrypt($_POST['mobileNum']),
+				$_POST['houseUnit'],
+				$this->decrypt($_POST['streetPurok']),
+				$this->decrypt($_POST['landMark']),
+				$_POST['otherNotes'],
+				$this->decrypt($_POST['barangayID']),
+				$this->decrypt($_POST['addressType'])
+			);
 		}
 	}
 
@@ -1677,16 +1754,17 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['userID'])) {
 			$this->AppModel->submitNewAddress_mod(
-			$this->decrypt($_POST['userID']), 
-			$this->decrypt($_POST['firstName']), 
-			$this->decrypt($_POST['lastName']), 
-			$this->decrypt($_POST['mobileNum']), 
-			$_POST['houseUnit'], 
-			$this->decrypt($_POST['streetPurok']), 
-			$this->decrypt($_POST['landMark']), 
-			$_POST['otherNotes'], 
-			$this->decrypt($_POST['barangayID']), 
-			$this->decrypt($_POST['addressType']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['firstName']),
+				$this->decrypt($_POST['lastName']),
+				$this->decrypt($_POST['mobileNum']),
+				$_POST['houseUnit'],
+				$this->decrypt($_POST['streetPurok']),
+				$this->decrypt($_POST['landMark']),
+				$_POST['otherNotes'],
+				$this->decrypt($_POST['barangayID']),
+				$this->decrypt($_POST['addressType'])
+			);
 		}
 	}
 
@@ -1705,7 +1783,7 @@ class AppController extends CI_Controller
 		}
 		// $this->AppModel->loadAddress_mod('2279');
 	}
-	
+
 	public function submitLoadAddress_ctrl()
 	{
 		if (isset($_POST['userID']) && isset($_POST['groupID'])) {
@@ -1772,7 +1850,8 @@ class AppController extends CI_Controller
 			$this->AppModel->updatePickupAt_mod(
 				$this->decrypt($_POST['date']),
 				$this->decrypt($_POST['time']),
-				$this->decrypt($_POST['userID']));
+				$this->decrypt($_POST['userID'])
+			);
 		}
 	}
 
@@ -1780,7 +1859,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tenantId'])) {
 			$this->AppModel->viewTenantCategories_mod(
-				$this->decrypt($_POST['tenantId']));
+				$this->decrypt($_POST['tenantId'])
+			);
 		}
 		// $this->AppModel->viewTenantCategories_mod(2);
 	}
@@ -1803,7 +1883,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['ticketID'])) {
 			$this->AppModel->getTotalFee_mod(
-				$this->decrypt($_POST['ticketID']));
+				$this->decrypt($_POST['ticketID'])
+			);
 		}
 	}
 
@@ -1812,7 +1893,8 @@ class AppController extends CI_Controller
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->checkBuId_mod(
 				$this->decrypt($_POST['cusId']),
-				$this->decrypt($_POST['bunitCode']));
+				$this->decrypt($_POST['bunitCode'])
+			);
 		}
 	}
 
@@ -1828,7 +1910,8 @@ class AppController extends CI_Controller
 	{
 		//	if (isset($_POST['unitGroupId'])) {
 		$this->AppModel->load_store_mod(
-			$this->decrypt($_POST['groupID']));
+			$this->decrypt($_POST['groupID'])
+		);
 		//	}
 		// $this->AppModel->display_store_mod('1','1');
 	}
@@ -1837,7 +1920,7 @@ class AppController extends CI_Controller
 	{
 		$this->AppModel->getglobalcat_mod();
 	}
-	public function getPickupTime_ctrl() 
+	public function getPickupTime_ctrl()
 	{
 		$this->AppModel->getPickupTime_mod();
 	}
@@ -1853,11 +1936,12 @@ class AppController extends CI_Controller
 	public function searchGc_item_ctrl()
 	{
 		if (isset($_POST['search'])) {
-			$this->AppModel->searchGc_item_mod($_POST['search'], 
-			$_POST['unitGroupId'],
-			$_POST['bunitCode'],
-			$_POST['groupCode']
-		);
+			$this->AppModel->searchGc_item_mod(
+				$_POST['search'],
+				$_POST['unitGroupId'],
+				$_POST['bunitCode'],
+				$_POST['groupCode']
+			);
 		}
 	}
 
@@ -1881,26 +1965,29 @@ class AppController extends CI_Controller
 	public function chat_ctrl()
 	{
 		$this->AppModel->chat_mod(
-			$this->decrypt($_POST['userID']), 
-			$this->decrypt($_POST['riderId']), 
-			$this->decrypt($_POST['ticketId']));
+			$this->decrypt($_POST['userID']),
+			$this->decrypt($_POST['riderId']),
+			$this->decrypt($_POST['ticketId'])
+		);
 		// $this->AppModel->chat_mod('344','35');
 	}
 
 	public function send_chat_ctrl()
 	{
 		$this->AppModel->send_chat_mod(
-			$this->decrypt($_POST['userID']), 
-			$this->decrypt($_POST['riderId']), 
-			$_POST['chat'], 
-			$this->decrypt($_POST['ticketId']));
+			$this->decrypt($_POST['userID']),
+			$this->decrypt($_POST['riderId']),
+			$_POST['chat'],
+			$this->decrypt($_POST['ticketId'])
+		);
 	}
 
 	public function check_version_ctrl()
 	{
 		if (isset($_POST['appName'])) {
 			$this->AppModel->check_version_mod(
-				$this->decrypt($_POST['appName']));
+				$this->decrypt($_POST['appName'])
+			);
 		}
 		// $this->AppModel->loadProfile_mod('2423');
 	}
@@ -1909,7 +1996,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['cusId'])) {
 			$this->AppModel->loadProfile_mod(
-				$this->decrypt($_POST['cusId']));
+				$this->decrypt($_POST['cusId'])
+			);
 		}
 		// $this->AppModel->loadProfile_mod('2423');
 	}
@@ -1918,7 +2006,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['tenantID'])) {
 			$this->AppModel->get_status_mod(
-				$this->decrypt($_POST['tenantID']));
+				$this->decrypt($_POST['tenantID'])
+			);
 		}
 		// $this->AppModel->loadProfile_mod('2423');
 	}
@@ -1927,7 +2016,8 @@ class AppController extends CI_Controller
 	{
 		if (isset($_POST['bunitCode'])) {
 			$this->AppModel->get_status_mod2(
-				$this->decrypt($_POST['bunitCode']));
+				$this->decrypt($_POST['bunitCode'])
+			);
 		}
 		// $this->AppModel->loadProfile_mod('2423');
 	}
@@ -1937,36 +2027,43 @@ class AppController extends CI_Controller
 	{
 		// file_put_contents('storage/uploads/profilePhotos/' . $_POST['userID'] . '.jpeg', base64_decode($_POST['base64Image']));
 		// return $output_file;
-		if (isset($_POST['userID']) && isset($_POST['picName'])){
+		if (isset($_POST['userID']) && isset($_POST['picName'])) {
 			$this->AppModel->uploadProfilePic_mod(
-				$this->decrypt($_POST['userID']), 
-				$this->decrypt($_POST['picName']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['picName'])
+			);
 		}
 	}
 
 	public function uploadId_ctrl()
 	{
-		if (isset($_POST['userID']) && 
-		isset($_POST['discountId']) && 
-		isset($_POST['name']) && 
-		isset($_POST['idNumber']) && 
-		isset($_POST['imageName'])) {
+		if (
+			isset($_POST['userID']) &&
+			isset($_POST['discountId']) &&
+			isset($_POST['name']) &&
+			isset($_POST['idNumber']) &&
+			isset($_POST['imageName'])
+		) {
 			$this->AppModel->uploadId_mod(
-				$this->decrypt($_POST['userID']), 
-				$this->decrypt($_POST['discountId']), 
-				$this->decrypt($_POST['name']), 
-				$this->decrypt($_POST['idNumber']), 
-				$this->decrypt($_POST['imageName']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['discountId']),
+				$this->decrypt($_POST['name']),
+				$this->decrypt($_POST['idNumber']),
+				$this->decrypt($_POST['imageName'])
+			);
 		}
 	}
 
 	public function uploadNumber_ctrl()
 	{
-		if (isset($_POST['userID']) && 
-		isset($_POST['number'])) {
+		if (
+			isset($_POST['userID']) &&
+			isset($_POST['number'])
+		) {
 			$this->AppModel->uploadNumber_mod(
-				$this->decrypt($_POST['userID']), 
-				$this->decrypt($_POST['number']));
+				$this->decrypt($_POST['userID']),
+				$this->decrypt($_POST['number'])
+			);
 		}
 	}
 
@@ -1995,5 +2092,4 @@ class AppController extends CI_Controller
 		file_put_contents('storage/uploads/discount_ids/' . $output_file . '.jpeg', base64_decode($base64_string));
 		return $output_file;
 	}
-
 }

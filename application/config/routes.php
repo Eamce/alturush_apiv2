@@ -71,8 +71,8 @@ $route['gcGetAddress_r']                = 'AppController/gcGetAddress_ctrl';
 $route['gcLoadBu_r']                    = 'AppController/gcLoadBu_ctrl';
 $route['gcLoadBu2_r']                   = 'AppController/gcLoadBu2_ctrl';
 $route['getBu_r']                       = 'AppController/getBu_ctrl';
-$route['getBu_r1']                      = 'AppController/getBu_ctrl1';    
-$route['getBu_r2']                      = 'AppController/getBu_ctrl2';  
+$route['getBu_r1']                      = 'AppController/getBu_ctrl1';
+$route['getBu_r2']                      = 'AppController/getBu_ctrl2';
 $route['getStore_r']                    = 'AppController/getStore_ctrl';
 $route['getStore2_r']                   = 'AppController/getStore2_ctrl';
 $route['getTenant_r']                   = 'AppController/getTenant_ctrl';
@@ -141,7 +141,7 @@ $route['listenCartSubtotal_r']          = 'AppController/listenCartSubtotal_ctrl
 $route['loadFlavor_r']                  = 'AppController/loadFlavor_ctrl';
 $route['loadDrinks_r']                  = 'AppController/loadDrinks_ctrl';
 $route['loadFries_r']                   = 'AppController/loadFries_ctrl';
-$route['loadSide_r' ]                   = 'AppController/loadSide_ctrl';
+$route['loadSide_r']                   = 'AppController/loadSide_ctrl';
 $route['checkAddon_r']                  = 'AppController/checkAddon_ctrl';
 $route['loadAddonSide_r']               = 'AppController/loadAddonSide_ctrl';
 $route['loadAddonDessert_r']            = 'AppController/loadAddonDessert_ctrl';
@@ -275,4 +275,3 @@ $route['decryptPass']                   = 'TestController/decryptPass';
 
 
 /*  */
-
